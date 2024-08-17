@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://dbx1o6r8vd1qg"]
+
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/UI/MainMenuView.cs" id="1_mip7k"]
+[ext_resource type="PackedScene" uid="uid://qux4pcjfy3ru" path="res://Blueprint/Example/Prefabs/UI/Button.tscn" id="2_1x7m2"]
+
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("_startButton", "_quitButton")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mip7k")
+_startButton = NodePath("MenuPanel/StartSessionButton")
+_quitButton = NodePath("MenuPanel/QuitButton")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2, 0.2, 0.2, 1)
+
+[node name="MenuPanel" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -200.0
+offset_right = 150.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(150, 200)
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="StartSessionButton" parent="MenuPanel" instance=ExtResource("2_1x7m2")]
+layout_mode = 2
+text = "Start"
+
+[node name="QuitButton" parent="MenuPanel" instance=ExtResource("2_1x7m2")]
+layout_mode = 2

@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AppConfig" load_steps=4 format=3 uid="uid://b0kjmk3n6384d"]
+
+[ext_resource type="PackedScene" uid="uid://dbx1o6r8vd1qg" path="res://Blueprint/Example/Scenes/MainMenu.tscn" id="1_htc4x"]
+[ext_resource type="Script" path="res://Blueprint/Scripts/Configs/AppConfig.cs" id="1_ll26v"]
+[ext_resource type="PackedScene" uid="uid://c0f134qr8qw6a" path="res://Blueprint/Example/Scenes/SessionScene.tscn" id="2_vayca"]
+
+[resource]
+script = ExtResource("1_ll26v")
+MainMenuScene = ExtResource("1_htc4x")
+SessionScene = ExtResource("2_vayca")
+SavesFolder = "Saves"
+EnableAutosaves = true

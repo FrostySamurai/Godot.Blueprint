@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://qux4pcjfy3ru"]
+
+[ext_resource type="Theme" uid="uid://div3ivpdg406u" path="res://Blueprint/Example/Themes/MainTheme.tres" id="1_h0qd7"]
+
+[node name="QuitButton" type="Button"]
+custom_minimum_size = Vector2(0, 40)
+theme = ExtResource("1_h0qd7")
+text = "Quit"

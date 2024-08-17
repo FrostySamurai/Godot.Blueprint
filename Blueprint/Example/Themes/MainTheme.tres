@@ -1,0 +1,74 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://div3ivpdg406u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jme61"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.101961, 0.101961, 0.101961, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.325441, 0.325441, 0.325441, 1)
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qquxb"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.101961, 0.101961, 0.101961, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.886262, 0.886262, 0.886261, 1)
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mp3xd"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.101961, 0.101961, 0.101961, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.886275, 0.886275, 0.886275, 1)
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8sbfc"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.101961, 0.101961, 0.101961, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.775063, 0.775063, 0.775063, 1)
+corner_detail = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xhiec"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.101961, 0.101961, 0.101961, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.552956, 0.552956, 0.552955, 1)
+corner_detail = 10
+
+[resource]
+Button/constants/icon_max_width = 0
+Button/styles/disabled = SubResource("StyleBoxFlat_jme61")
+Button/styles/focus = SubResource("StyleBoxFlat_qquxb")
+Button/styles/hover = SubResource("StyleBoxFlat_mp3xd")
+Button/styles/normal = SubResource("StyleBoxFlat_8sbfc")
+Button/styles/pressed = SubResource("StyleBoxFlat_xhiec")
