@@ -65,6 +65,7 @@ namespace Samurai.Application
                 }
                 
                 SessionHandlers.Add(entry);
+                Log.Debug($"Handler '{entry.GetType().Name}' registered.", LogTag);
             }
         }
 

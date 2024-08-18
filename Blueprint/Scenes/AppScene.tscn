@@ -1,13 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdkmid4wiul8w"]
+[gd_scene load_steps=3 format=3 uid="uid://bdkmid4wiul8w"]
 
 [ext_resource type="Script" path="res://Blueprint/Scripts/StartUp.cs" id="1_t3dba"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/ExampleSessionHandler.cs" id="2_kia1m"]
-[ext_resource type="Script" path="res://Blueprint/Scripts/Scenes/SceneParent.cs" id="3_6etfn"]
 
-[node name="StartUp" type="Node2D" node_paths=PackedStringArray("_sessionHandlers", "_sceneParent")]
+[node name="StartUp" type="Node2D" node_paths=PackedStringArray("_sessionHandlers", "_sceneParent", "_poolParent2D", "_poolParent3D")]
 script = ExtResource("1_t3dba")
 _sessionHandlers = [NodePath("SessionHandlers/ExampleSessionHandler")]
 _sceneParent = NodePath("SceneParent")
+_poolParent2D = NodePath("PoolParent2D")
+_poolParent3D = NodePath("PoolParent3D")
 
 [node name="SessionHandlers" type="Node" parent="."]
 
@@ -16,4 +17,11 @@ script = ExtResource("2_kia1m")
 Data = "This is some data from inspector."
 
 [node name="SceneParent" type="Node" parent="."]
-script = ExtResource("3_6etfn")
+
+[node name="PoolParent2D" type="Node2D" parent="."]
+process_mode = 4
+visible = false
+
+[node name="PoolParent3D" type="Node3D" parent="."]
+process_mode = 4
+visible = false

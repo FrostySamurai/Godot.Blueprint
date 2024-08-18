@@ -1,9 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://c0f134qr8qw6a"]
+[gd_scene load_steps=9 format=3 uid="uid://c0f134qr8qw6a"]
 
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/SessionController.cs" id="1_35w0u"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Player/PlayerController.cs" id="2_5qfhl"]
 [ext_resource type="Texture2D" uid="uid://btlxntokqyx2j" path="res://icon.svg" id="2_66x8w"]
 [ext_resource type="PackedScene" uid="uid://qux4pcjfy3ru" path="res://Blueprint/Example/Prefabs/UI/Button.tscn" id="3_m87r4"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/UI/SessionView.cs" id="3_tanh7"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Tester.cs" id="4_xa5cn"]
+[ext_resource type="PackedScene" uid="uid://buxfj2thonpon" path="res://Blueprint/Example/Prefabs/TestPrefab.tscn" id="5_xtyaw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mnmuj"]
+size = Vector2(24, 24)
 
 [node name="SessionScene" type="Node2D" node_paths=PackedStringArray("_pauseView")]
 process_mode = 3
@@ -13,9 +19,20 @@ _pauseView = NodePath("CanvasLayer")
 [node name="Game" type="Node2D" parent="."]
 process_mode = 1
 
-[node name="Sprite2D" type="Sprite2D" parent="Game"]
-position = Vector2(570, 111)
+[node name="Player" type="CharacterBody2D" parent="Game"]
+position = Vector2(595, 263)
+script = ExtResource("2_5qfhl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Player"]
+shape = SubResource("RectangleShape2D_mnmuj")
+
+[node name="Sprite2D" type="Sprite2D" parent="Game/Player"]
+scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_66x8w")
+
+[node name="Tester" type="Node" parent="Game"]
+script = ExtResource("4_xa5cn")
+_prefab = ExtResource("5_xtyaw")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_continueButton", "_mainMenuButton")]
 process_mode = 2

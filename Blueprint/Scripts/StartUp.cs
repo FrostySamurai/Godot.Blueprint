@@ -1,5 +1,6 @@
 ﻿using Godot;
 using Samurai.Application.Configs;
+using Samurai.Application.Pooling;
 using Samurai.Application.Scenes;
 using Samurai.Application.SessionHandling;
 
@@ -16,7 +17,11 @@ namespace Samurai.Application
         [Export]
         private NodeSessionHandler[] _sessionHandlers;
         [Export]
-        private SceneParent _sceneParent;
+        private Node _sceneParent;
+        [Export]
+        private CanvasItem _poolParent2D;
+        [Export]
+        private Node3D _poolParent3D;
         
         private static bool _wasStartedUp;
 
@@ -31,6 +36,8 @@ namespace Samurai.Application
             
             _wasStartedUp = true;
             Definitions.Create(_resourcesPath, _definitionsFolder, _configsFolder);
+            SceneLoader.Init(_sceneParent);
+            NodePool.Init(_poolParent2D, _poolParent3D);
             Session.Register(_sessionHandlers);
             
             App.Add(_sceneParent);

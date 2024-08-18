@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://buxfj2thonpon"]
+
+[ext_resource type="Texture2D" uid="uid://btlxntokqyx2j" path="res://icon.svg" id="1_jiloo"]
+
+[node name="TestPrefab" type="Sprite2D"]
+texture = ExtResource("1_jiloo")
