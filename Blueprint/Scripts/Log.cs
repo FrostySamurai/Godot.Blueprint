@@ -5,7 +5,7 @@ namespace Samurai.Application
 {
     public static class Log
     {
-        public static void Debug(string message, string tag)
+        public static void Debug(string message, string tag = null)
         {
             if (tag.IsNullOrEmpty())
             {
@@ -16,7 +16,7 @@ namespace Samurai.Application
             GD.Print($"[{tag}] {message}");
         }
         
-        public static void Error(string message, string tag)
+        public static void Error(string message, string tag = null)
         {
             if (tag.IsNullOrEmpty())
             {

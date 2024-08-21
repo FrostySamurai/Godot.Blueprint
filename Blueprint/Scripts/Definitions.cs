@@ -36,6 +36,12 @@ namespace Samurai.Application
         {
             return _instance._configs.TryGetValue(typeof(T), out var config) ? (T)config : null;
         }
+
+        public static bool TryGet<T>(string id, out T definition) where T : Definition
+        {
+            definition = Get<T>(id);
+            return definition is not null;
+        }
         
         public static T Get<T>(string id) where T : Definition
         {

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0f134qr8qw6a"]
+[gd_scene load_steps=11 format=3 uid="uid://c0f134qr8qw6a"]
 
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/SessionController.cs" id="1_35w0u"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Player/PlayerController.cs" id="2_5qfhl"]
@@ -7,9 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://dqwsw8qilieom" path="res://Blueprint/Example/Prefabs/projectile.tscn" id="3_1ey5g"]
 [ext_resource type="PackedScene" uid="uid://qux4pcjfy3ru" path="res://Blueprint/Example/Prefabs/UI/Button.tscn" id="3_m87r4"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/UI/SessionView.cs" id="3_tanh7"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Enemies/Health.cs" id="6_s27u2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mnmuj"]
 size = Vector2(24, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2w0di"]
+size = Vector2(18, 18)
 
 [node name="SessionScene" type="Node2D" node_paths=PackedStringArray("_pauseView")]
 process_mode = 3
@@ -35,6 +39,18 @@ shape = SubResource("RectangleShape2D_mnmuj")
 
 [node name="Sprite2D" type="Sprite2D" parent="Game/Player"]
 scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_66x8w")
+
+[node name="Destructable" type="Area2D" parent="Game"]
+position = Vector2(500, 500)
+script = ExtResource("6_s27u2")
+_definitionId = "basic"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Destructable"]
+shape = SubResource("RectangleShape2D_2w0di")
+
+[node name="Sprite2D" type="Sprite2D" parent="Game/Destructable"]
+scale = Vector2(0.15, 0.15)
 texture = ExtResource("2_66x8w")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_continueButton", "_mainMenuButton")]
