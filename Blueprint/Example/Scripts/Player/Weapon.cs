@@ -49,11 +49,12 @@ public partial class Weapon : Node2D, IPoolReturnable
         }
 
         double time = Time.GetTicksMsec() / 1000d;
-        if (_lastFiredAt > 0d || time - _lastFiredAt < _definition.FireRate)
+        if (_lastFiredAt > 0d && time - _lastFiredAt < _definition.FireCooldown)
         {
             return;
         }
 
+        _lastFiredAt = time;
         var parent = Session.Get<SessionReferences>().ProjectileParent;
         for (int i = 0; i < _spawnPoints.Length; i++)
         {

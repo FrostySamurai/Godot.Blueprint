@@ -7,7 +7,7 @@ namespace Samurai.Example.Player.Defs;
 public partial class WeaponDefinition : Definition
 {
     [Export]
-    public double FireRate;
+    public double FireCooldown = 1d;
     [Export]
     public PackedScene Prefab;
     [Export]
