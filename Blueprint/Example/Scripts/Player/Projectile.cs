@@ -1,20 +1,37 @@
 ﻿using Godot;
 using Samurai.Application.Pooling;
 using Samurai.Example.Enemies;
+using Samurai.Example.Player.Defs;
 
 namespace Samurai.Example.Player;
 
-public partial class Projectile : Area2D
+public partial class Projectile : Area2D, IPoolReturnable
 {
 	[Export]
 	private float _speed = 100f;
 
+	private ProjectileDefinition _definition;
+
+	#region Lifecycle
+
 	public override void _EnterTree()
 	{
 		base._EnterTree();
-
+		
 		AreaEntered += OnAreaEntered;
 	}
+
+	public void Init(ProjectileDefinition def)
+	{
+		_definition = def;
+	}
+
+	public void OnReturnToPool()
+	{
+		_definition = null;
+	}
+
+	#endregion Lifecycle
 
 	public override void _Process(double delta)
 	{
@@ -30,7 +47,7 @@ public partial class Projectile : Area2D
 			return;
 		}
 		
-		destructable.TakeDamage(1);
+		destructable.TakeDamage(_definition.Damage);
 		NodePool.Return(this);
 	}
 }

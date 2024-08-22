@@ -7,20 +7,29 @@ namespace Samurai.Example.Player;
 public partial class PlayerController : CharacterBody2D
 {
 	public const float Speed = 300.0f;
-	public const float JumpVelocity = -400.0f;
-
+	
 	[Export]
-	private PackedScene _projectilePrefab;
+	private Node2D _weaponParent;
+
+	private PlayerModel _model;
+	private Weapon _currentWeapon;
+
+	#region Lifecycle
+
+	public override void _EnterTree()
+	{
+		base._EnterTree();
+
+		_model = Session.Get<PlayerModel>();
+		SpawnWeapon();
+	}
 
 	public override void _Input(InputEvent @event)
 	{
 		base._Input(@event);
 		if (@event.IsActionPressed("fire"))
 		{
-			var parent = Session.Get<SessionReferences>().ProjectileParent;
-			var projectile = NodePool.Retrieve<Projectile>(_projectilePrefab, parent);
-			projectile.GlobalPosition = GlobalPosition;
-			projectile.SetRotation(Rotation);
+			_currentWeapon?.Fire();
 		}
 	}
 
@@ -47,4 +56,27 @@ public partial class PlayerController : CharacterBody2D
 		Velocity = velocity;
 		MoveAndSlide();
 	}
+
+	#endregion Lifecycle
+
+	#region Private
+
+	private void SpawnWeapon()
+	{
+		if (_currentWeapon is not null)
+		{
+			NodePool.Return(_currentWeapon);
+		}
+
+		var def = _model.Weapon;
+		if (def is null)
+		{
+			return;
+		}
+
+		_currentWeapon = NodePool.Retrieve<Weapon>(def.Prefab, _weaponParent);
+		_currentWeapon.Init(def);
+	}
+
+	#endregion Private
 }

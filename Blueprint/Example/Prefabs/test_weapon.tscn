@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3s1o27guq527"]
+
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Player/Weapon.cs" id="1_u66qr"]
+[ext_resource type="Texture2D" uid="uid://btlxntokqyx2j" path="res://icon.svg" id="2_ijqxx"]
+
+[node name="TestWeapon" type="Node2D" node_paths=PackedStringArray("_spawnPoints")]
+script = ExtResource("1_u66qr")
+_spawnPoints = [NodePath("Barrel/SpawnPoint"), NodePath("Barrel2/SpawnPoint"), NodePath("Barrel3/SpawnPoint")]
+
+[node name="Barrel" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Barrel"]
+position = Vector2(0, -12)
+scale = Vector2(0.03, 0.2)
+texture = ExtResource("2_ijqxx")
+
+[node name="SpawnPoint" type="Node2D" parent="Barrel"]
+position = Vector2(0, -22)
+
+[node name="Barrel2" type="Node2D" parent="."]
+rotation = 0.214676
+
+[node name="Sprite2D" type="Sprite2D" parent="Barrel2"]
+position = Vector2(0, -12)
+scale = Vector2(0.03, 0.2)
+texture = ExtResource("2_ijqxx")
+
+[node name="SpawnPoint" type="Node2D" parent="Barrel2"]
+position = Vector2(0, -22)
+
+[node name="Barrel3" type="Node2D" parent="."]
+rotation = -0.214676
+
+[node name="Sprite2D" type="Sprite2D" parent="Barrel3"]
+position = Vector2(0, -12)
+scale = Vector2(0.03, 0.2)
+texture = ExtResource("2_ijqxx")
+
+[node name="SpawnPoint" type="Node2D" parent="Barrel3"]
+position = Vector2(0, -22)
