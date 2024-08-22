@@ -17,11 +17,13 @@ public partial class PlayerController : CharacterBody2D
 
 	#region Lifecycle
 
-	public override void _EnterTree()
+	public override void _Ready()
 	{
-		base._EnterTree();
+		base._Ready();
 
 		_model = Session.Get<PlayerModel>();
+		_model.Player = this;
+		
 		SpawnWeapon();
 	}
 

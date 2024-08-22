@@ -14,15 +14,20 @@ public partial class Projectile : Area2D, IPoolReturnable
 
 	#region Lifecycle
 
+	public override void _Ready()
+	{
+		base._EnterTree();
+		
+		AreaEntered += OnAreaEntered;
+	}
+
 	public void Init(ProjectileDefinition def)
 	{
 		_definition = def;
-		AreaEntered += OnAreaEntered;
 	}
 
 	public void OnReturnToPool()
 	{
-		AreaEntered -= OnAreaEntered;
 		_definition = null;
 	}
 

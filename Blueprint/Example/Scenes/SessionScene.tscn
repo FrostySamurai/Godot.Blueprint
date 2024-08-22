@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0f134qr8qw6a"]
+[gd_scene load_steps=12 format=3 uid="uid://c0f134qr8qw6a"]
 
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/SessionController.cs" id="1_35w0u"]
 [ext_resource type="Texture2D" uid="uid://btlxntokqyx2j" path="res://icon.svg" id="2_66x8w"]
@@ -6,7 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://54ijngjcdxui" path="res://Blueprint/Example/Prefabs/Player.tscn" id="3_ka3kg"]
 [ext_resource type="PackedScene" uid="uid://qux4pcjfy3ru" path="res://Blueprint/Example/Prefabs/UI/Button.tscn" id="3_m87r4"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/UI/SessionView.cs" id="3_tanh7"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Enemies/Chaser.cs" id="4_pcyi3"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Enemies/Health.cs" id="6_s27u2"]
+[ext_resource type="Resource" uid="uid://dmedawmb0lktq" path="res://Resources/Definitions/Enemies/BasicEnemyHealthDefinition.tres" id="6_xutmh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kjbfw"]
+size = Vector2(18, 18)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2w0di"]
 size = Vector2(18, 18)
@@ -27,15 +32,22 @@ ProjectileParent = NodePath("ProjectilesParent")
 
 [node name="Player" parent="Game" instance=ExtResource("3_ka3kg")]
 
-[node name="Destructable" type="Area2D" parent="Game"]
-position = Vector2(500, 500)
-script = ExtResource("6_s27u2")
-_definitionId = "basic"
+[node name="Enemy" type="Area2D" parent="Game" node_paths=PackedStringArray("_health")]
+position = Vector2(372, 296)
+script = ExtResource("4_pcyi3")
+_health = NodePath("Health")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Destructable"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Enemy"]
+shape = SubResource("RectangleShape2D_kjbfw")
+
+[node name="Health" type="Area2D" parent="Game/Enemy"]
+script = ExtResource("6_s27u2")
+_definition = ExtResource("6_xutmh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Enemy/Health"]
 shape = SubResource("RectangleShape2D_2w0di")
 
-[node name="Sprite2D" type="Sprite2D" parent="Game/Destructable"]
+[node name="Sprite2D" type="Sprite2D" parent="Game/Enemy/Health"]
 scale = Vector2(0.15, 0.15)
 texture = ExtResource("2_66x8w")
 

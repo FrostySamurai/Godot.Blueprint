@@ -111,7 +111,7 @@ namespace Samurai.Application.Pooling
                 return;
             }
             
-            var poolInstance = instance.GetNode<PoolInstance>(PoolInstanceName);
+            var poolInstance = instance.GetNodeOrNull<PoolInstance>(PoolInstanceName);
             if (poolInstance is null)
             {
                 instance.QueueFree();

@@ -9,21 +9,18 @@ public partial class Health : Area2D
     private const string LogTag = nameof(Health);
     
     [Export]
-    private string _definitionId;
+    private HealthDefinition _definition;
 
     private int _health;
+
+    public delegate void Destroyed();
+    public event Destroyed OnDestroyed;
     
     public override void _EnterTree()
     {
         base._EnterTree();
-
-        if (!Definitions.TryGet<HealthDefinition>(_definitionId, out var definition))
-        {
-            Log.Error($"No definition exists for definition id '{_definitionId}'. Name: {Name}", LogTag);
-            return;
-        }
-
-        _health = definition.MaxHealth;
+        
+        _health = _definition.MaxHealth;
     }
 
     public void TakeDamage(int amount)
@@ -33,7 +30,7 @@ public partial class Health : Area2D
         if (_health <= 0)
         {
             Log.Debug($"'{Name}' died.", LogTag);
-            QueueFree();
+            OnDestroyed?.Invoke();
         }
     }
 }
