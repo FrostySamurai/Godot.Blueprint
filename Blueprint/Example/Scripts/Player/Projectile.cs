@@ -14,20 +14,15 @@ public partial class Projectile : Area2D, IPoolReturnable
 
 	#region Lifecycle
 
-	public override void _EnterTree()
-	{
-		base._EnterTree();
-		
-		AreaEntered += OnAreaEntered;
-	}
-
 	public void Init(ProjectileDefinition def)
 	{
 		_definition = def;
+		AreaEntered += OnAreaEntered;
 	}
 
 	public void OnReturnToPool()
 	{
+		AreaEntered -= OnAreaEntered;
 		_definition = null;
 	}
 
@@ -48,6 +43,11 @@ public partial class Projectile : Area2D, IPoolReturnable
 		}
 		
 		destructable.TakeDamage(_definition.Damage);
+		CallDeferred(nameof(Return));
+	}
+
+	private void Return()
+	{
 		NodePool.Return(this);
 	}
 }

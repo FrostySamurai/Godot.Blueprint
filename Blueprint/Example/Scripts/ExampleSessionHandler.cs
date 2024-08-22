@@ -18,7 +18,7 @@ public partial class ExampleSessionHandler : NodeSessionHandler
 
         var playerModel = new PlayerModel
         {
-            Weapon = DefaultWeapon
+            WeaponId = DefaultWeapon.Id
         };
 
         Session.Add(playerModel);

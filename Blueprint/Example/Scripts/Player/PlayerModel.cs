@@ -9,5 +9,5 @@ public class PlayerModel : ISavable
     [JsonIgnore]
     public string Id => "player_model";
 
-    public WeaponDefinition Weapon;
+    public string WeaponId;
 }

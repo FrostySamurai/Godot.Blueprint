@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://54ijngjcdxui"]
+
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Player/PlayerController.cs" id="1_86kot"]
+[ext_resource type="Texture2D" uid="uid://btlxntokqyx2j" path="res://icon.svg" id="2_poi2a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mnmuj"]
+size = Vector2(24, 24)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_weaponParent")]
+position = Vector2(595, 263)
+script = ExtResource("1_86kot")
+_weaponParent = NodePath("WeaponParent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_mnmuj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_poi2a")
+
+[node name="WeaponParent" type="Node2D" parent="."]

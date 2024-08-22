@@ -1,6 +1,7 @@
 using Godot;
 using Samurai.Application;
 using Samurai.Application.Pooling;
+using Samurai.Example.Player.Defs;
 
 namespace Samurai.Example.Player;
 
@@ -68,7 +69,7 @@ public partial class PlayerController : CharacterBody2D
 			NodePool.Return(_currentWeapon);
 		}
 
-		var def = _model.Weapon;
+		var def = Definitions.Get<WeaponDefinition>(_model.WeaponId);
 		if (def is null)
 		{
 			return;
