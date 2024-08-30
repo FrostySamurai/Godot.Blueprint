@@ -1,20 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://c0f134qr8qw6a"]
+[gd_scene load_steps=7 format=3 uid="uid://c0f134qr8qw6a"]
 
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/SessionController.cs" id="1_35w0u"]
-[ext_resource type="Texture2D" uid="uid://btlxntokqyx2j" path="res://icon.svg" id="2_66x8w"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/SessionReferences.cs" id="2_ymf5s"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Enemies/Spawner.cs" id="3_k806w"]
 [ext_resource type="PackedScene" uid="uid://54ijngjcdxui" path="res://Blueprint/Example/Prefabs/Player.tscn" id="3_ka3kg"]
 [ext_resource type="PackedScene" uid="uid://qux4pcjfy3ru" path="res://Blueprint/Example/Prefabs/UI/Button.tscn" id="3_m87r4"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/UI/SessionView.cs" id="3_tanh7"]
-[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Health.cs" id="4_t00gy"]
-[ext_resource type="Resource" uid="uid://dmedawmb0lktq" path="res://Resources/Definitions/Enemies/BasicEnemyHealthDefinition.tres" id="6_xutmh"]
-[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Enemies/Chaser.cs" id="7_u2haj"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2w0di"]
-size = Vector2(18, 18)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3v5he"]
-size = Vector2(18, 18)
 
 [node name="SessionScene" type="Node2D" node_paths=PackedStringArray("_pauseView")]
 process_mode = 3
@@ -24,35 +15,22 @@ _pauseView = NodePath("CanvasLayer")
 [node name="Game" type="Node2D" parent="."]
 process_mode = 1
 
-[node name="SessionReferences" type="Node2D" parent="Game" node_paths=PackedStringArray("ProjectileParent")]
+[node name="SessionReferences" type="Node2D" parent="Game" node_paths=PackedStringArray("ProjectileParent", "EnemyParent")]
 script = ExtResource("2_ymf5s")
 ProjectileParent = NodePath("ProjectilesParent")
+EnemyParent = NodePath("EnemyParent")
 
 [node name="ProjectilesParent" type="Node2D" parent="Game/SessionReferences"]
 
+[node name="EnemyParent" type="Node2D" parent="Game/SessionReferences"]
+
+[node name="Managers" type="Node2D" parent="Game"]
+
+[node name="Spawner" type="Node2D" parent="Game/Managers"]
+script = ExtResource("3_k806w")
+
 [node name="Player" parent="Game" instance=ExtResource("3_ka3kg")]
 position = Vector2(593, 264)
-
-[node name="Enemy" type="Node2D" parent="Game"]
-position = Vector2(372, 296)
-
-[node name="Health" type="Area2D" parent="Game/Enemy"]
-script = ExtResource("4_t00gy")
-_definition = ExtResource("6_xutmh")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Enemy/Health"]
-shape = SubResource("RectangleShape2D_2w0di")
-
-[node name="Sprite2D" type="Sprite2D" parent="Game/Enemy/Health"]
-scale = Vector2(0.15, 0.15)
-texture = ExtResource("2_66x8w")
-
-[node name="Chaser" type="Area2D" parent="Game/Enemy" node_paths=PackedStringArray("_root")]
-script = ExtResource("7_u2haj")
-_root = NodePath("..")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Game/Enemy/Chaser"]
-shape = SubResource("RectangleShape2D_3v5he")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_continueButton", "_mainMenuButton")]
 process_mode = 2

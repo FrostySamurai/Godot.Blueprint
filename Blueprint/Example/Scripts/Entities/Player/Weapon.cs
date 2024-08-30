@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using System.Runtime.CompilerServices;
+using Godot;
 using RedHerring.Extensions.Collections;
 using Samurai.Application;
 using Samurai.Application.Pooling;
@@ -15,6 +16,8 @@ public partial class Weapon : Node2D
 
     private WeaponDefinition _definition;
     private double _lastFiredAt;
+
+    private bool _isActive;
 
     #region Lifecycle
 
@@ -41,8 +44,22 @@ public partial class Weapon : Node2D
         _definition = null;
     }
 
+    public override void _Process(double delta)
+    {
+        if (_isActive)
+        {
+            Fire();
+        }
+    }
+
     #endregion Lifecycle
 
+    public void SetActive(bool state)
+    {
+        _isActive = state;
+    }
+    
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Fire()
     {
         if (_definition is null)

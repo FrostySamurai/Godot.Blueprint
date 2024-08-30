@@ -7,6 +7,8 @@ public partial class SessionReferences : Node2D
 {
     [Export]
     public Node2D ProjectileParent;
+    [Export]
+    public Node2D EnemyParent;
 
     public override void _EnterTree()
     {

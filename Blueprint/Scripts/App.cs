@@ -50,6 +50,7 @@ namespace Samurai.Application
             SceneLoader.UnloadScene(config.MainMenuScene);
             SceneLoader.LoadScene(config.SessionScene);
             Log.Debug("Session started.", LogTag);
+            Log.Debug("====================================================================================");
         }
 
         public static void EndSession()
@@ -64,6 +65,7 @@ namespace Samurai.Application
             Session.End();
             SetPause(false);
             
+            Log.Debug("====================================================================================");
             Log.Debug("Session ended.", LogTag);
         }
 

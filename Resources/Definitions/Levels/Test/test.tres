@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="LevelDefinition" load_steps=3 format=3 uid="uid://onbk4csfkkpt"]
+
+[ext_resource type="Resource" uid="uid://d35yuce2687b0" path="res://Resources/Definitions/Levels/Test/test_wave_1.tres" id="1_mo7rs"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Defs/LevelDefinition.cs" id="1_ul0bb"]
+
+[resource]
+script = ExtResource("1_ul0bb")
+Waves = Array[Object]([ExtResource("1_mo7rs")])
+Id = "test"

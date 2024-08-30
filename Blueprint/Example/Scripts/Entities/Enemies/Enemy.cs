@@ -1,10 +1,11 @@
 using Godot;
 using Samurai.Application;
+using Samurai.Application.Pooling;
 using Samurai.Example.Entities.Player;
 
 namespace Samurai.Example.Entities.Enemies;
 
-public partial class Chaser : Area2D
+public partial class Enemy : CharacterBody2D
 {
 	[Export]
 	private float _speed = 50f;
@@ -13,6 +14,8 @@ public partial class Chaser : Area2D
 	
 	private PlayerModel _model;
 
+	private bool _isActive;
+
 	#region Lifecycle
 
 	public override void _Ready()
@@ -20,12 +23,20 @@ public partial class Chaser : Area2D
 		base._Ready();
 
 		_model = Session.Get<PlayerModel>();
-		AreaEntered += OnAreaEntered;
+	}
+
+	public override void _EnterTree()
+	{
+		_isActive = true;
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		// TODO: this needs to be a CharacterBody2D or something that can collide
+		if (!_isActive)
+		{
+			return;
+		}
+		
 		base._PhysicsProcess(delta);
 
 		if (_model.Player is null)
@@ -35,17 +46,26 @@ public partial class Chaser : Area2D
 		
 		var playerPosition = _model.Player.GlobalPosition;
 		var direction = (playerPosition - _root.GlobalPosition).Normalized();
-		_root.GlobalPosition += direction * _speed * (float)delta;
+		Velocity = direction * _speed;
+		MoveAndSlide();
+
+		// var collision = MoveAndCollide(Velocity * (float)delta);
+		// if (collision?.GetCollider() is PlayerController player)
+		// {
+		// 	Log.Debug("Dealing damage to player.");
+		// 	CallDeferred(nameof(Return));
+		// 	_isActive = false;
+		// }
 	}
 
 	#endregion Lifecycle
 
-	#region Events
+	#region Private
 
-	private void OnAreaEntered(Area2D area)
+	private void Return()
 	{
-		
+		NodePool.Return(this);
 	}
 
-	#endregion Events
+	#endregion Private
 }

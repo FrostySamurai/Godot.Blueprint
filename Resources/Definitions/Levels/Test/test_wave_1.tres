@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="WaveDefinition" load_steps=5 format=3 uid="uid://d35yuce2687b0"]
+
+[ext_resource type="PackedScene" uid="uid://cran3hl73jw04" path="res://Blueprint/Example/Prefabs/Enemy.tscn" id="1_cwj6u"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Enemies/Defs/WaveDefinition.cs" id="1_etfqq"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Enemies/Defs/WaveEntry.cs" id="2_082nn"]
+
+[sub_resource type="Resource" id="Resource_ghsy5"]
+script = ExtResource("2_082nn")
+Prefab = ExtResource("1_cwj6u")
+Count = 50
+
+[resource]
+script = ExtResource("1_etfqq")
+Entries = Array[Object]([SubResource("Resource_ghsy5")])
+Id = "test_wave_1"

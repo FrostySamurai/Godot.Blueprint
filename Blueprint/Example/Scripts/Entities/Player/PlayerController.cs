@@ -32,7 +32,11 @@ public partial class PlayerController : CharacterBody2D
 		base._Input(@event);
 		if (@event.IsActionPressed("fire"))
 		{
-			_currentWeapon?.Fire();
+			_currentWeapon?.SetActive(true);
+		}
+		else if (@event.IsActionReleased("fire"))
+		{
+			_currentWeapon.SetActive(false);
 		}
 	}
 
@@ -57,7 +61,7 @@ public partial class PlayerController : CharacterBody2D
 		}
 
 		Velocity = velocity;
-		MoveAndSlide();
+		MoveAndCollide(Velocity * (float)delta);
 	}
 
 	#endregion Lifecycle
