@@ -1,7 +1,8 @@
 ﻿using Godot;
 using Samurai.Application;
 using Samurai.Application.SessionHandling;
-using Samurai.Example.Player;
+using Samurai.Example.Entities.Enemies;
+using Samurai.Example.Entities.Player;
 using Samurai.Example.Player.Defs;
 
 namespace Samurai.Example;
@@ -22,6 +23,7 @@ public partial class ExampleSessionHandler : NodeSessionHandler
         };
 
         Session.Add(playerModel);
+        Session.Add(new SpawnManager(GetViewport()));
     }
 
     public override void OnSessionEnd()

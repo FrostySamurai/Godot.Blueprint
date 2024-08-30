@@ -1,8 +1,8 @@
 ﻿using Godot;
 using Samurai.Application;
-using Samurai.Example.Enemies.Defs;
+using Samurai.Example.Entities.Defs;
 
-namespace Samurai.Example.Enemies;
+namespace Samurai.Example.Entities;
 
 public partial class Health : Area2D
 {

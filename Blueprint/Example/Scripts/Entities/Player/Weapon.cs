@@ -4,9 +4,9 @@ using Samurai.Application;
 using Samurai.Application.Pooling;
 using Samurai.Example.Player.Defs;
 
-namespace Samurai.Example.Player;
+namespace Samurai.Example.Entities.Player;
 
-public partial class Weapon : Node2D, IPoolReturnable
+public partial class Weapon : Node2D
 {
     internal const string LogTag = "Weapons";
     
@@ -33,8 +33,10 @@ public partial class Weapon : Node2D, IPoolReturnable
         }
     }
 
-    public void OnReturnToPool()
+    public override void _ExitTree()
     {
+        base._ExitTree();
+        
         _lastFiredAt = 0d;
         _definition = null;
     }

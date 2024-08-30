@@ -1,11 +1,10 @@
 ﻿using Godot;
 using Samurai.Application.Pooling;
-using Samurai.Example.Enemies;
 using Samurai.Example.Player.Defs;
 
-namespace Samurai.Example.Player;
+namespace Samurai.Example.Entities.Player;
 
-public partial class Projectile : Area2D, IPoolReturnable
+public partial class Projectile : Area2D
 {
 	[Export]
 	private float _speed = 100f;
@@ -26,8 +25,10 @@ public partial class Projectile : Area2D, IPoolReturnable
 		_definition = def;
 	}
 
-	public void OnReturnToPool()
+	public override void _ExitTree()
 	{
+		base._ExitTree();
+			
 		_definition = null;
 	}
 
@@ -42,12 +43,12 @@ public partial class Projectile : Area2D, IPoolReturnable
 
 	private void OnAreaEntered(Area2D other)
 	{
-		if (other is not Health destructable)
+		if (other is not Health health)
 		{
 			return;
 		}
 		
-		destructable.TakeDamage(_definition.Damage);
+		health.TakeDamage(_definition.Damage);
 		CallDeferred(nameof(Return));
 	}
 

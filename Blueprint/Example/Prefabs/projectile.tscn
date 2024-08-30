@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://dqwsw8qilieom"]
 
-[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Player/Projectile.cs" id="1_rjyls"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Player/Projectile.cs" id="1_00lpx"]
 [ext_resource type="Texture2D" uid="uid://btlxntokqyx2j" path="res://icon.svg" id="2_0qnmj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7lyl"]
 size = Vector2(12, 12)
 
 [node name="Projectile" type="Area2D"]
-script = ExtResource("1_rjyls")
+script = ExtResource("1_00lpx")
 _speed = 500.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

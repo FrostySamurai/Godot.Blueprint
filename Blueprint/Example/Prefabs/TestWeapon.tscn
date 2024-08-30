@@ -1,10 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://d3s1o27guq527"]
 
-[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Player/Weapon.cs" id="1_isgw1"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Player/Weapon.cs" id="1_3u1og"]
 [ext_resource type="Texture2D" uid="uid://btlxntokqyx2j" path="res://icon.svg" id="2_352t3"]
 
 [node name="TestWeapon" type="Node2D" node_paths=PackedStringArray("_spawnPoints")]
-script = ExtResource("1_isgw1")
+script = ExtResource("1_3u1og")
 _spawnPoints = [NodePath("Barrel/SpawnPoint"), NodePath("Barrel2/SpawnPoint"), NodePath("Barrel3/SpawnPoint")]
 
 [node name="Barrel" type="Node2D" parent="."]

@@ -87,11 +87,6 @@ namespace Samurai.Application.Pooling
 
             instance.GetParent()?.RemoveChild(instance);
             parent.AddChild(instance);
-
-            if (instance is IPoolRetrievable poolable)
-            {
-                poolable.OnRetrieveFromPool();
-            }
             
             return instance;
         }
@@ -159,11 +154,6 @@ namespace Samurai.Application.Pooling
             if (instance is null || pool is null)
             {
                 return;
-            }
-            
-            if (instance is IPoolReturnable poolable)
-            {
-                poolable.OnReturnToPool();
             }
 
             Node parent = instance is Node3D ? _parent3D : _parent2D;
