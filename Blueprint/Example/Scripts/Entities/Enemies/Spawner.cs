@@ -12,7 +12,7 @@ public partial class Spawner : Node2D
 {
     private readonly List<WaveDefinition> _waves = new();
     
-    public override void _Ready()
+    public override void _EnterTree()
     {
         Session.Add(this);
 

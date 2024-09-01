@@ -1,5 +1,6 @@
 ﻿using Godot;
 using Samurai.Application.Pooling;
+using Samurai.Example.Entities.Health;
 using Samurai.Example.Player.Defs;
 
 namespace Samurai.Example.Entities.Player;
@@ -13,22 +14,23 @@ public partial class Projectile : Area2D
 
 	#region Lifecycle
 
-	public override void _Ready()
+	public void Init(ProjectileDefinition def)
+	{
+		_definition = def;
+	}
+
+	public override void _EnterTree()
 	{
 		base._EnterTree();
 		
 		AreaEntered += OnAreaEntered;
 	}
 
-	public void Init(ProjectileDefinition def)
-	{
-		_definition = def;
-	}
-
 	public override void _ExitTree()
 	{
 		base._ExitTree();
-			
+
+		AreaEntered -= OnAreaEntered;
 		_definition = null;
 	}
 
@@ -43,7 +45,7 @@ public partial class Projectile : Area2D
 
 	private void OnAreaEntered(Area2D other)
 	{
-		if (other is not Health health)
+		if (other is not HealthComponent health)
 		{
 			return;
 		}

@@ -137,7 +137,13 @@ namespace Samurai.Application
 
         public static void Save(string fileName)
         {
-            Get<SaveSystem>().Save(_instance._sessionId, fileName, _instance.GetSaveState());
+            var save = _instance.GetSaveState();
+            foreach (var entry in save)
+            {
+                entry.OnSave();
+            }
+            
+            Get<SaveSystem>().Save(_instance._sessionId, fileName, save);
         }
 
         #endregion Saves
@@ -155,14 +161,20 @@ namespace Samurai.Application
             
             if (!string.IsNullOrEmpty(saveName))
             {
-                var save = App.Get<SaveSystem>().Load<List<object>>(sessionId, saveName);
-                save?.ForEach(x => _content[x.GetType()] = x);
+                var save = App.Get<SaveSystem>().Load<List<ISavable>>(sessionId, saveName);
+                foreach (var entry in save)
+                {
+                    entry.OnLoad();
+                    _content[entry.GetType()] = entry;
+                }
             }
         }
 
-        private List<object> GetSaveState()
+        private List<ISavable> GetSaveState()
         {
-            return new List<object>(_content.Values.Where(x => x is ISavable));
+            var save = new List<ISavable>();
+            save.AddRange(_content.Values.Where(x => x is ISavable).Cast<ISavable>());
+            return save;
         }
 
         private void Dispose()

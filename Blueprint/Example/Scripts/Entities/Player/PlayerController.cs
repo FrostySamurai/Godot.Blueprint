@@ -17,7 +17,7 @@ public partial class PlayerController : CharacterBody2D
 
 	#region Lifecycle
 
-	public override void _Ready()
+	public override void _EnterTree()
 	{
 		base._Ready();
 

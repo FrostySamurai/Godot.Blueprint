@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cran3hl73jw04"]
+[gd_scene load_steps=8 format=3 uid="uid://cran3hl73jw04"]
 
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Enemies/Enemy.cs" id="1_3lp75"]
-[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Health.cs" id="2_codso"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Entity.cs" id="2_ccdca"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Health/HealthComponent.cs" id="2_codso"]
 [ext_resource type="Resource" uid="uid://dmedawmb0lktq" path="res://Resources/Definitions/Enemies/BasicEnemyHealthDefinition.tres" id="3_k5poh"]
 [ext_resource type="Texture2D" uid="uid://btlxntokqyx2j" path="res://icon.svg" id="4_j4udy"]
 
@@ -16,11 +17,16 @@ position = Vector2(372, 296)
 script = ExtResource("1_3lp75")
 _root = NodePath(".")
 
+[node name="Entity" type="Node2D" parent="." node_paths=PackedStringArray("_root")]
+script = ExtResource("2_ccdca")
+_root = NodePath("..")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2d8e6")
 
-[node name="Health" type="Area2D" parent="."]
+[node name="Health" type="Area2D" parent="." node_paths=PackedStringArray("_entity")]
 script = ExtResource("2_codso")
+_entity = NodePath("../Entity")
 _definition = ExtResource("3_k5poh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Health"]

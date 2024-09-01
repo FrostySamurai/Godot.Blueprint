@@ -59,14 +59,17 @@ namespace Samurai.Application
             Session.BeforeSessionUnload();
             
             var config = Definitions.Config<AppConfig>();
-            SceneLoader.UnloadScene(config.SessionScene);
+            SceneLoader.UnloadScene(config.SessionScene, AfterUnload);
             SceneLoader.LoadScene(config.MainMenuScene);
+
+            void AfterUnload()
+            {
+                Session.End();
+                SetPause(false);
             
-            Session.End();
-            SetPause(false);
-            
-            Log.Debug("====================================================================================");
-            Log.Debug("Session ended.", LogTag);
+                Log.Debug("====================================================================================");
+                Log.Debug("Session ended.", LogTag);
+            }
         }
 
         public static void SetPause(bool state)

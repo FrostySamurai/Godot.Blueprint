@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Godot;
 using Samurai.Application.Utility;
 
@@ -57,7 +58,7 @@ namespace Samurai.Application.Scenes
             Log.Debug($"Scene '{sceneName}' loaded.", LogTag);
         }
 
-        public static void UnloadScene(PackedScene scene)
+        public static void UnloadScene(PackedScene scene, Action onUnloaded = null)
         {
             if (scene is null)
             {
@@ -79,7 +80,11 @@ namespace Samurai.Application.Scenes
 
             loaded.QueueFree();
             _loadedScenes.Remove(scene);
-            Log.Debug($"Scene '{sceneName}' unloaded.", nameof(SceneLoader));
+            loaded.TreeExited += () =>
+            {
+                onUnloaded?.Invoke();
+                Log.Debug($"Scene '{sceneName}' unloaded.", nameof(SceneLoader));
+            };
         }
 
         #endregion Public

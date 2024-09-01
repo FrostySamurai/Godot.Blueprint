@@ -2,6 +2,9 @@ namespace Samurai.Application.Saving
 {
     public interface ISavable
     {
-        string Id { get; }
+        public string Id { get; }
+        
+        public void OnSave() {}
+        public void OnLoad() {}
     }
 }

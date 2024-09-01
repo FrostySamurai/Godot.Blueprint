@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 namespace Samurai.Application.Events
 {
+    public delegate void EventCallback<in T>(T evt) where T : IEvent;
+    
     internal abstract class EventChannel
     {
         internal abstract Type DataType { get; }
@@ -14,10 +16,10 @@ namespace Samurai.Application.Events
     {
         internal override Type DataType => typeof(T);
 
-        private List<Action<T>> _callbacks = new();
-        private Dictionary<object, Action<T>> _callbacksBySource = new();
+        private List<EventCallback<T>> _callbacks = new();
+        private Dictionary<object, EventCallback<T>> _callbacksBySource = new();
 
-        internal void Register(Action<T> callback, object source)
+        internal void Register(EventCallback<T> callback, object source)
         {
             if (_callbacksBySource.TryGetValue(source, out var existing))
             {
@@ -44,7 +46,7 @@ namespace Samurai.Application.Events
             }
         }
 
-        private void Remove(Action<T> callback, object source)
+        private void Remove(EventCallback<T> callback, object source)
         {
             _callbacksBySource.Remove(source);
             int index = _callbacks.FindIndex(x => x == callback);

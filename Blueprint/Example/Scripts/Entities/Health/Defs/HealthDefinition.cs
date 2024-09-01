@@ -1,7 +1,7 @@
 ﻿using Godot;
 using Samurai.Application;
 
-namespace Samurai.Example.Entities.Defs;
+namespace Samurai.Example.Entities.Health.Defs;
 
 [GlobalClass]
 public partial class HealthDefinition : Definition

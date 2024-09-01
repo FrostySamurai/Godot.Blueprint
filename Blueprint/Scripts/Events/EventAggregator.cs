@@ -38,7 +38,7 @@ namespace Samurai.Application.Events
 
         #region Events
 
-        public void Register<T>(Action<T> callback, object source) where T : IEvent
+        public void Register<T>(EventCallback<T> callback, object source) where T : IEvent
         {
             GetChannel<T>().Register(callback, source);
         }

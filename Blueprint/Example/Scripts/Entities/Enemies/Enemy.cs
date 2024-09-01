@@ -18,15 +18,9 @@ public partial class Enemy : CharacterBody2D
 
 	#region Lifecycle
 
-	public override void _Ready()
-	{
-		base._Ready();
-
-		_model = Session.Get<PlayerModel>();
-	}
-
 	public override void _EnterTree()
 	{
+		_model ??= Session.Get<PlayerModel>();
 		_isActive = true;
 	}
 

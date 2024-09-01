@@ -7,15 +7,9 @@ using Samurai.Application.Utility;
 
 namespace Samurai.Application.Pooling
 {
-    public partial class PoolInstance : Node
-    {
-        public string PrefabPath { get; internal set; }
-    }
-    
     public static class NodePool
     {
         private const string LogTag = nameof(NodePool);
-        private const string PoolInstanceName = nameof(PoolInstance);
 
         private static CanvasItem _parent2D;
         private static Node3D _parent3D;
@@ -71,20 +65,16 @@ namespace Samurai.Application.Pooling
             if (instance is null)
             {
                 instance = prefab.Instantiate<T>();
-                instance?.SetName($"{prefab.Name()}_{++_instanceCounter}");
-            }
-
-            if (instance is null)
-            {
-                Log.Error($"Mismatch of passed type '{typeof(T).Name}' and type of prefab on path '{prefabPath}'.", LogTag);
-                return null;
+                if (instance is null)
+                {
+                    Log.Error($"Mismatch of passed type '{typeof(T).Name}' and type of prefab on path '{prefabPath}'.", LogTag);
+                    return null;
+                }
+                
+                instance.SetName($"{prefab.Name()}_{++_instanceCounter}");
             }
             
-            var poolInstance = new PoolInstance();
-            poolInstance.Name = PoolInstanceName;
-            poolInstance.PrefabPath = prefabPath;
-            instance.AddChild(poolInstance);
-
+            
             instance.GetParent()?.RemoveChild(instance);
             parent.AddChild(instance);
             
@@ -105,15 +95,14 @@ namespace Samurai.Application.Pooling
             {
                 return;
             }
-            
-            var poolInstance = instance.GetNodeOrNull<PoolInstance>(PoolInstanceName);
-            if (poolInstance is null)
+
+            if (instance.SceneFilePath.IsNullOrEmpty())
             {
                 instance.QueueFree();
                 return;
             }
 
-            var pool = GetPool(poolInstance.PrefabPath);
+            var pool = GetPool(instance.SceneFilePath);
             Return(instance, pool);
         }
 
@@ -128,18 +117,19 @@ namespace Samurai.Application.Pooling
                     continue;
                 }
                 
-                var poolInstance = typedEntry.GetNode<PoolInstance>(PoolInstanceName);
-                if (poolInstance is null)
+                
+                if (typedEntry.SceneFilePath.IsNullOrEmpty())
                 {
                     if (destroyNonPoolObjects)
                     {
                         typedEntry.QueueFree();
                     }
-                    
-                    continue;
-                }
 
-                if (string.Compare(poolInstance.PrefabPath, path, StringComparison.Ordinal) != 0)
+                    return;
+                }
+                
+
+                if (string.Compare(typedEntry.SceneFilePath, path, StringComparison.Ordinal) != 0)
                 {
                     continue;
                 }
