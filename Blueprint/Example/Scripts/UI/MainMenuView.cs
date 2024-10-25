@@ -20,6 +20,7 @@ public partial class MainMenuView : Node
 
     private void StartSession()
     {
+        Session.Register(new LevelSessionHandler("test"));
         App.StartSession("Session name");
     }
 }

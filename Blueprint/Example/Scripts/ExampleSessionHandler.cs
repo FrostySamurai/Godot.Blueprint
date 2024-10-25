@@ -1,7 +1,7 @@
 ﻿using Godot;
 using Samurai.Application;
 using Samurai.Application.SessionHandling;
-using Samurai.Example.Entities;
+using Samurai.Example.Entities.Health;
 using Samurai.Example.Entities.Player;
 using Samurai.Example.Player.Defs;
 
@@ -22,9 +22,8 @@ public partial class ExampleSessionHandler : NodeSessionHandler
             WeaponId = DefaultWeapon.Id
         };
 
-        Session.Add(new EntityModel());
+        Session.Add(new HealthModel());
         Session.Add(playerModel);
-        Session.Add(new LevelModel("test"));
     }
 
     public override void OnSessionEnd()

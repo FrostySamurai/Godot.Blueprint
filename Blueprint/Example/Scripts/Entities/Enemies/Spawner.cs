@@ -75,5 +75,7 @@ public partial class Spawner : Node2D
                 instance.GlobalPosition = new Vector2(xPos, yPos);
             }
         }
+        
+        Session.Get<LevelModel>().SpawnedWaveIds.Add(wave.Id);
     }
 }
