@@ -48,6 +48,8 @@ namespace Samurai.Application
             
             SessionHandlers.Sort((x, y) => x.Priority.CompareTo(y.Priority));
             SessionHandlers.ForEach(x => x.OnSessionEnd());
+
+            SessionHandlers.RemoveAll(x => x.IsOneShot);
             
             _instance.Dispose();
             _instance = null;

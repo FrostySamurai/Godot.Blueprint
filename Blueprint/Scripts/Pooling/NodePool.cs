@@ -51,7 +51,7 @@ namespace Samurai.Application.Pooling
             string prefabPath = prefab.GetPath();
             var pool = GetPool(prefabPath);
             T instance = null;
-            while (instance is null && !pool.IsNullOrEmpty())
+            while (instance is null && pool.NotNullOrEmpty())
             {
                 // TODO: care about possible type mismatch
                 var poolItem = pool.Dequeue();
