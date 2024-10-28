@@ -9,8 +9,6 @@ public partial class Enemy : CharacterBody2D
 {
 	[Export]
 	private float _speed = 50f;
-	[Export]
-	private Node2D _root;
 	
 	private PlayerModel _model;
 
@@ -39,7 +37,7 @@ public partial class Enemy : CharacterBody2D
 		}
 		
 		var playerPosition = _model.Player.GlobalPosition;
-		var direction = (playerPosition - _root.GlobalPosition).Normalized();
+		var direction = (playerPosition - GlobalPosition).Normalized();
 		Velocity = direction * _speed;
 		MoveAndSlide();
 
