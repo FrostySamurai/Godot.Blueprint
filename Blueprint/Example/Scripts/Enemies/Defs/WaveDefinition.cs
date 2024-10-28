@@ -1,7 +1,7 @@
 ﻿using Godot;
 using Samurai.Application;
 
-namespace Samurai.Example.Entities.Enemies.Defs;
+namespace Samurai.Example.Enemies.Defs;
 
 [GlobalClass]
 public partial class WaveDefinition : Definition

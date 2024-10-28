@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d3s1o27guq527" path="res://Blueprint/Example/Prefabs/TestWeapon.tscn" id="1_4tjjn"]
 [ext_resource type="Resource" uid="uid://b1ok0nd0f5o0d" path="res://Resources/Definitions/Weapons/Test/TestProjectile.tres" id="1_gx3xa"]
-[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Player/Defs/WeaponDefinition.cs" id="3_3phm0"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Player/Defs/WeaponDefinition.cs" id="3_3phm0"]
 
 [resource]
 script = ExtResource("3_3phm0")

@@ -1,9 +1,10 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Samurai.Application;
-using Samurai.Example.Entities.Health.Defs;
+using Samurai.Example.Entities;
+using Samurai.Example.Health.Defs;
 
-namespace Samurai.Example.Entities.Health.Data;
+namespace Samurai.Example.Health.Data;
 
 [Serializable]
 public class HealthData : IComponentData

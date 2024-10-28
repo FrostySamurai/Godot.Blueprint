@@ -2,11 +2,11 @@
 using Godot;
 using RedHerring.Extensions.Collections;
 using Samurai.Application;
-using Samurai.Application.Pooling;
 using Samurai.Example.Defs;
-using Samurai.Example.Entities.Enemies.Defs;
+using Samurai.Example.Enemies.Defs;
+using Samurai.Example.Entities;
 
-namespace Samurai.Example.Entities.Enemies;
+namespace Samurai.Example.Enemies;
 
 public partial class Spawner : Node2D
 {

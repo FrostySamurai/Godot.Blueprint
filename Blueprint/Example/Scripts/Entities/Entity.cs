@@ -1,7 +1,7 @@
 ﻿using Godot;
 using Samurai.Application;
 using Samurai.Application.Pooling;
-using Samurai.Example.Entities.Health;
+using Samurai.Example.Health;
 
 namespace Samurai.Example.Entities;
 

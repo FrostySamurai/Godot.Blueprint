@@ -1,7 +1,8 @@
 using Godot;
-using Samurai.Example.Entities.Health.Data;
+using Samurai.Example.Entities;
+using Samurai.Example.Health.Data;
 
-namespace Samurai.Example.Entities.Health.Defs;
+namespace Samurai.Example.Health.Defs;
 
 [GlobalClass]
 public partial class HealthComponentDefinition : EntityComponentDefinition

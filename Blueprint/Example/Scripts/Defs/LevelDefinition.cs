@@ -1,6 +1,6 @@
 ﻿using Godot;
 using Samurai.Application;
-using Samurai.Example.Entities.Enemies.Defs;
+using Samurai.Example.Enemies.Defs;
 
 namespace Samurai.Example.Defs;
 

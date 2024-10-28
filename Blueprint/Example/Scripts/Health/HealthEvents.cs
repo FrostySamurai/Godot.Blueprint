@@ -1,6 +1,6 @@
 ﻿using Samurai.Application.Events;
 
-namespace Samurai.Example.Entities.Health;
+namespace Samurai.Example.Health;
 
 public static class HealthEvents
 {

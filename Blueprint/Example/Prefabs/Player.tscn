@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://54ijngjcdxui"]
 
-[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Player/PlayerController.cs" id="1_ad5h6"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Player/PlayerController.cs" id="1_ad5h6"]
 [ext_resource type="Texture2D" uid="uid://btlxntokqyx2j" path="res://icon.svg" id="2_poi2a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mnmuj"]

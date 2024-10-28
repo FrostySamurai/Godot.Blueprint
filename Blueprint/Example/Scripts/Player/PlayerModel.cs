@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Samurai.Application.Saving;
 
-namespace Samurai.Example.Entities.Player;
+namespace Samurai.Example.Player;
 
 public class PlayerModel : ISavable
 {

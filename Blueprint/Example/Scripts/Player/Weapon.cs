@@ -5,7 +5,7 @@ using Samurai.Application;
 using Samurai.Application.Pooling;
 using Samurai.Example.Player.Defs;
 
-namespace Samurai.Example.Entities.Player;
+namespace Samurai.Example.Player;
 
 public partial class Weapon : Node2D
 {

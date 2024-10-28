@@ -1,9 +1,9 @@
 using Godot;
 using Samurai.Application;
 using Samurai.Application.Pooling;
-using Samurai.Example.Entities.Player;
+using Samurai.Example.Player;
 
-namespace Samurai.Example.Entities.Enemies;
+namespace Samurai.Example.Enemies;
 
 public partial class Enemy : CharacterBody2D
 {

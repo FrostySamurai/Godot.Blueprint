@@ -1,8 +1,9 @@
 ﻿using Godot;
 using Samurai.Application;
-using Samurai.Example.Entities.Health.Data;
+using Samurai.Example.Entities;
+using Samurai.Example.Health.Data;
 
-namespace Samurai.Example.Entities.Health;
+namespace Samurai.Example.Health;
 
 public static class HealthSystem
 {

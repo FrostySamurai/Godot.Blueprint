@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/SessionController.cs" id="1_35w0u"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/SessionReferences.cs" id="2_ymf5s"]
-[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Enemies/Spawner.cs" id="3_k806w"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Enemies/Spawner.cs" id="3_k806w"]
 [ext_resource type="PackedScene" uid="uid://54ijngjcdxui" path="res://Blueprint/Example/Prefabs/Player.tscn" id="3_ka3kg"]
 [ext_resource type="PackedScene" uid="uid://qux4pcjfy3ru" path="res://Blueprint/Example/Prefabs/UI/Button.tscn" id="3_m87r4"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/UI/SessionView.cs" id="3_tanh7"]

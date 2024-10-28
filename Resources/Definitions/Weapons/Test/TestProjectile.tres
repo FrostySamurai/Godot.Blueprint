@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="ProjectileDefinition" load_steps=3 format=3 uid="uid://b1ok0nd0f5o0d"]
 
 [ext_resource type="PackedScene" uid="uid://dqwsw8qilieom" path="res://Blueprint/Example/Prefabs/Projectile.tscn" id="1_m2h28"]
-[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Player/Defs/ProjectileDefinition.cs" id="2_423cc"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Player/Defs/ProjectileDefinition.cs" id="2_423cc"]
 
 [resource]
 script = ExtResource("2_423cc")

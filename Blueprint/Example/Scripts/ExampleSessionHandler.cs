@@ -2,7 +2,7 @@
 using Samurai.Application;
 using Samurai.Application.SessionHandling;
 using Samurai.Example.Entities;
-using Samurai.Example.Entities.Player;
+using Samurai.Example.Player;
 using Samurai.Example.Player.Defs;
 
 namespace Samurai.Example;
