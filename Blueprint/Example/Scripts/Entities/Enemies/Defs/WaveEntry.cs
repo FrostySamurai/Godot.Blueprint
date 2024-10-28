@@ -6,7 +6,7 @@ namespace Samurai.Example.Entities.Enemies.Defs;
 public partial class WaveEntry : Resource
 {
     [Export]
-    public PackedScene Prefab;
+    public EntityDefinition EntityDefinition;
     [Export]
     public int Count;
 }

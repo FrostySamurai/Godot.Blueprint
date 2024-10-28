@@ -45,13 +45,13 @@ public partial class Projectile : Area2D
 
 	private void OnAreaEntered(Area2D other)
 	{
-		if (other is not HealthComponent health)
-		{
-			return;
-		}
-		
-		health.TakeDamage(_definition.Damage);
-		CallDeferred(nameof(Return));
+		// if (other is not HealthComponent health)
+		// {
+		// 	return;
+		// }
+		//
+		// // health.TakeDamage(_definition.Damage);
+		// CallDeferred(nameof(Return));
 	}
 
 	private void Return()

@@ -1,8 +1,0 @@
-[gd_resource type="Resource" script_class="HealthDefinition" load_steps=2 format=3 uid="uid://dmedawmb0lktq"]
-
-[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Health/Defs/HealthDefinition.cs" id="1_6et3s"]
-
-[resource]
-script = ExtResource("1_6et3s")
-MaxHealth = 3
-Id = "basic"

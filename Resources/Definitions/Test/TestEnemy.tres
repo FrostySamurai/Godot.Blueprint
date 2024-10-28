@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=5 format=3 uid="uid://b2x66qd1i35oy"]
+
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Health/Defs/HealthComponentDefinition.cs" id="1_xurvf"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/EntityDefinition.cs" id="2_2frgc"]
+[ext_resource type="PackedScene" uid="uid://cran3hl73jw04" path="res://Blueprint/Example/Prefabs/Enemy.tscn" id="2_5pn03"]
+
+[sub_resource type="Resource" id="Resource_yfg7t"]
+script = ExtResource("1_xurvf")
+MaxHealth = 50
+Id = "test"
+
+[resource]
+script = ExtResource("2_2frgc")
+Prefab = ExtResource("2_5pn03")
+Components = Array[Resource]([SubResource("Resource_yfg7t")])
+Id = "test_enemy"

@@ -9,13 +9,20 @@ namespace Samurai.Example.Entities.Health.Data;
 public class HealthData : IComponentData
 {
     [JsonIgnore]
-    public HealthDefinition Definition;
+    public HealthComponentDefinition Definition;
     
     public string DefinitionId;
     public int Current;
 
+    public HealthData(HealthComponentDefinition definition)
+    {
+        Definition = definition;
+        DefinitionId = definition.Id;
+        Current = Definition.MaxHealth;
+    }
+
     public void OnLoad()
     {
-        Definition = Definitions.Get<HealthDefinition>(DefinitionId);
+        Definition = Definitions.Get<HealthComponentDefinition>(DefinitionId);
     }
 }

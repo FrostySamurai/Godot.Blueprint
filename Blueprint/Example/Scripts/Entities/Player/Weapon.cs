@@ -83,6 +83,7 @@ public partial class Weapon : Node2D
             }
 
             var projectileDef = _definition.Projectiles[i];
+            // TODO: there is a bug here somewhere because sometimes 1 or 2 projectiles fire for some reason
             var projectile = NodePool.Retrieve<Projectile>(projectileDef.Prefab, parent);
             
             projectile.Init(projectileDef);

@@ -44,15 +44,13 @@ public partial class Spawner : Node2D
         var rng = new RandomNumberGenerator();
         foreach (var waveEntry in wave.Entries)
         {
-            if (waveEntry.Prefab is null)
+            if (waveEntry.EntityDefinition is null)
             {
                 continue;
             }
             
             for (int i = 0; i < waveEntry.Count; i++)
             {
-                var instance = NodePool.Retrieve<Enemy>(waveEntry.Prefab, parent);
-
                 int xSide = Mathf.Sign(rng.Randf() - 0.5f);
                 xSide = xSide == 0 ? 1 : xSide;
                 int ySide = Mathf.Sign(rng.Randf() - 0.5f);
@@ -72,7 +70,7 @@ public partial class Spawner : Node2D
                     yPos = rng.RandfRange(-100f, viewportSize.Y + 100f);
                 }
 
-                instance.GlobalPosition = new Vector2(xPos, yPos);
+                EntitySystem.Spawn(waveEntry.EntityDefinition, this, new Vector2(xPos, yPos));
             }
         }
         

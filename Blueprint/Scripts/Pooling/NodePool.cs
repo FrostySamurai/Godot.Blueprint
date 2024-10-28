@@ -153,7 +153,7 @@ namespace Samurai.Application.Pooling
                 instance.QueueFree();
                 return;
             }
-            
+
             instance.GetParent().RemoveChild(instance);
             parent.AddChild(instance);
             pool.Enqueue(instance);
