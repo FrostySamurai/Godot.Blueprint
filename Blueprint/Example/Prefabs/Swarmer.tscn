@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://cran3hl73jw04"]
+[gd_scene load_steps=6 format=3 uid="uid://ce412jrvsq2hx"]
 
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Enemies/Enemy.cs" id="1_3lp75"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Entity.cs" id="2_ccdca"]
@@ -10,7 +10,7 @@ size = Vector2(18, 18)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2w0di"]
 size = Vector2(18, 18)
 
-[node name="Enemy" type="Node2D" node_paths=PackedStringArray("_root")]
+[node name="Swarmer" type="Node2D" node_paths=PackedStringArray("_root")]
 position = Vector2(372, 296)
 script = ExtResource("2_ccdca")
 _root = NodePath(".")
