@@ -3,6 +3,7 @@ using Godot;
 using RedHerring.Extensions.Collections;
 using Samurai.Application;
 using Samurai.Example.Defs;
+using Samurai.Example.Enemies.Data;
 using Samurai.Example.Enemies.Defs;
 using Samurai.Example.Entities;
 
@@ -70,7 +71,14 @@ public partial class Spawner : Node2D
                     yPos = rng.RandfRange(-100f, viewportSize.Y + 100f);
                 }
 
-                EntitySystem.Spawn(waveEntry.EntityDefinition, this, new Vector2(xPos, yPos));
+                var entity = EntitySystem.Spawn(waveEntry.EntityDefinition, parent, new Vector2(xPos, yPos));
+                if (i == 0)
+                {
+                    if (Session.Get<EntityModel>().TryGetComponent(entity.Id, out FlockingData data))
+                    {
+                        data.IsDebug = true;
+                    }
+                }
             }
         }
         

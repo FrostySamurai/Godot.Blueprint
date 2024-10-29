@@ -41,6 +41,11 @@ namespace Samurai.Application.Pooling
 
         #region Public
 
+        public static T RetrieveParentless<T>(PackedScene prefab) where T : Node
+        {
+            return Retrieve<T>(prefab, null);
+        }
+
         public static T Retrieve<T>(PackedScene prefab, Node parent) where T : Node
         {
             if (prefab is null)
@@ -76,8 +81,8 @@ namespace Samurai.Application.Pooling
             
             
             instance.GetParent()?.RemoveChild(instance);
-            parent.AddChild(instance);
-            
+            parent?.AddChild(instance);
+
             return instance;
         }
 

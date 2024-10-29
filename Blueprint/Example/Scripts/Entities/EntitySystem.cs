@@ -11,7 +11,7 @@ public static class EntitySystem
 
     public static Entity Spawn(EntityDefinition definition, Node2D parent, Vector2 position)
     {
-        var instance = NodePool.Retrieve<Entity>(definition.Prefab, parent);
+        var instance = NodePool.RetrieveParentless<Entity>(definition.Prefab);
         if (instance is null)
         {
             Log.Error($"Failed to instantiate entity '{definition.Id}'! Error in prefab..", LogTag);
@@ -26,6 +26,8 @@ public static class EntitySystem
         var data = new EntityData(definition, instance);
         var model = Session.Get<EntityModel>();
         model.Entities[id] = data;
+        
+        parent.AddChild(instance);
         
         Session.Events.Raise(new EntityEvents.OnEntitySpawned(id));
 

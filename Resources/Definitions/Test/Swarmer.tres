@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="EntityDefinition" load_steps=5 format=3 uid="uid://b2x66qd1i35oy"]
+[gd_resource type="Resource" script_class="EntityDefinition" load_steps=7 format=3 uid="uid://b2x66qd1i35oy"]
 
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Health/Defs/HealthComponentDefinition.cs" id="1_dtmcn"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Enemies/Defs/FlockingComponentDefinition.cs" id="2_81bwn"]
 [ext_resource type="PackedScene" uid="uid://ce412jrvsq2hx" path="res://Blueprint/Example/Prefabs/Swarmer.tscn" id="2_ipbii"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Defs/EntityDefinition.cs" id="3_q55cn"]
 
@@ -9,8 +10,13 @@ script = ExtResource("1_dtmcn")
 MaxHealth = 50
 Id = "test"
 
+[sub_resource type="Resource" id="Resource_fbl01"]
+script = ExtResource("2_81bwn")
+Radius = 100.0
+Id = "swarmer"
+
 [resource]
 script = ExtResource("3_q55cn")
 Prefab = ExtResource("2_ipbii")
-Components = Array[Resource]([SubResource("Resource_yfg7t")])
+Components = Array[Resource]([SubResource("Resource_yfg7t"), SubResource("Resource_fbl01")])
 Id = "swarmer"

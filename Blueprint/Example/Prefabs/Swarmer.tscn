@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ce412jrvsq2hx"]
+[gd_scene load_steps=7 format=3 uid="uid://ce412jrvsq2hx"]
 
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Enemies/Enemy.cs" id="1_3lp75"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Entity.cs" id="2_ccdca"]
@@ -10,13 +10,21 @@ size = Vector2(18, 18)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2w0di"]
 size = Vector2(18, 18)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_6ksq1"]
+
 [node name="Swarmer" type="Node2D" node_paths=PackedStringArray("_root")]
 position = Vector2(372, 296)
 script = ExtResource("2_ccdca")
 _root = NodePath(".")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_entity", "_flockDetector", "_flockDetectorShape")]
+collision_layer = 4
+collision_mask = 0
 script = ExtResource("1_3lp75")
+_speed = 100.0
+_entity = NodePath("..")
+_flockDetector = NodePath("FlockDetector")
+_flockDetectorShape = NodePath("FlockDetector/CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("RectangleShape2D_2d8e6")
@@ -29,3 +37,11 @@ texture = ExtResource("4_j4udy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Health"]
 shape = SubResource("RectangleShape2D_2w0di")
+
+[node name="FlockDetector" type="Area2D" parent="CharacterBody2D"]
+collision_layer = 0
+collision_mask = 4
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/FlockDetector"]
+shape = SubResource("CircleShape2D_6ksq1")
