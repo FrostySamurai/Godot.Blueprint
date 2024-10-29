@@ -22,6 +22,14 @@ public partial class Enemy : CharacterBody2D
 		_isActive = true;
 	}
 
+	public override void _Draw()
+	{
+		base._Draw();
+
+		const float RayLength = 40f;
+		DrawLine(Vector2.Zero, Velocity.Normalized() * RayLength, new Color(1f, 0f, 0f));
+	}
+
 	public override void _PhysicsProcess(double delta)
 	{
 		if (!_isActive)
@@ -40,6 +48,8 @@ public partial class Enemy : CharacterBody2D
 		var direction = (playerPosition - GlobalPosition).Normalized();
 		Velocity = direction * _speed;
 		MoveAndSlide();
+		
+		QueueRedraw(); // debug purposes
 
 		// var collision = MoveAndCollide(Velocity * (float)delta);
 		// if (collision?.GetCollider() is PlayerController player)
