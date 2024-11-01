@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://c0f134qr8qw6a"]
+[gd_scene load_steps=8 format=3 uid="uid://c0f134qr8qw6a"]
 
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/SessionController.cs" id="1_35w0u"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/SessionReferences.cs" id="2_ymf5s"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Enemies/EnemyManager.cs" id="3_jbr06"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Enemies/Spawner.cs" id="3_k806w"]
 [ext_resource type="PackedScene" uid="uid://54ijngjcdxui" path="res://Blueprint/Example/Prefabs/Player.tscn" id="3_ka3kg"]
 [ext_resource type="PackedScene" uid="uid://qux4pcjfy3ru" path="res://Blueprint/Example/Prefabs/UI/Button.tscn" id="3_m87r4"]
@@ -25,6 +26,9 @@ EnemyParent = NodePath("EnemyParent")
 [node name="EnemyParent" type="Node2D" parent="Game/SessionReferences"]
 
 [node name="Managers" type="Node2D" parent="Game"]
+
+[node name="EnemyManager" type="Node2D" parent="Game/Managers"]
+script = ExtResource("3_jbr06")
 
 [node name="Spawner" type="Node2D" parent="Game/Managers"]
 script = ExtResource("3_k806w")

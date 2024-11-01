@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Godot;
-using Newtonsoft.Json;
 using Samurai.Application;
 using Samurai.Example.Enemies.Defs;
 using Samurai.Example.Entities;
 
 namespace Samurai.Example.Enemies.Data;
 
-[Serializable]
 public class FlockingData : IComponentData
 {
-    [JsonIgnore]
+    public EntityComponentDefinition ComponentDefinition => Definition;
+
     public bool IsDebug;
-    [JsonIgnore]
+    public Enemy Self;
     public FlockingComponentDefinition Definition;
-    [JsonIgnore]
     public HashSet<Enemy> Flock = new();
-    [JsonIgnore]
-    public Vector2 FlockCenter;
+
+    public Vector2 Center;
+    public Vector2 Alignment;
+    public Vector2 Separation;
     
     public string DefinitionId;
 

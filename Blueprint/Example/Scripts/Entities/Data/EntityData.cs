@@ -8,6 +8,7 @@ namespace Samurai.Example.Entities;
 [Serializable]
 public class EntityData
 {
+    public string Id;
     public string DefinitionId;
     public Dictionary<Type, IComponentData> Components = new();
 
@@ -16,8 +17,9 @@ public class EntityData
     [JsonIgnore]
     public Entity Root;
 
-    public EntityData(EntityDefinition definition, Entity entity)
+    public EntityData(string id, EntityDefinition definition, Entity entity)
     {
+        Id = id;
         Definition = definition;
         DefinitionId = definition.Id;
         Root = entity;
@@ -34,10 +36,20 @@ public class EntityData
 
     public void OnSave()
     {
-        foreach (var entry in Components.Values)
+        // TODO: this is stupid because it will only work if you quit the game after save
+        var toRemove = new List<Type>();
+        foreach (var entry in Components)
         {
-            entry.OnSave();
+            if (entry.Value.ComponentDefinition.IgnoreInSave)
+            {
+                toRemove.Add(entry.Key);
+                continue;
+            }
+            
+            entry.Value.OnSave();
         }
+        
+        toRemove.ForEach(x => Components.Remove(x));
     }
 
     public void OnLoad()

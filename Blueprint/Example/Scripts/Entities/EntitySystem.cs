@@ -23,9 +23,9 @@ public static class EntitySystem
         string id = Guid.NewGuid().ToString();
         instance.Id = id;
 
-        var data = new EntityData(definition, instance);
+        var data = new EntityData(id, definition, instance);
         var model = Session.Get<EntityModel>();
-        model.Entities[id] = data;
+        model.Add(data);
         
         parent.AddChild(instance);
         

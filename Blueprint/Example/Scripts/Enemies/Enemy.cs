@@ -17,7 +17,6 @@ public partial class Enemy : CharacterBody2D
 	[Export]
 	private CollisionShape2D _flockDetectorShape;
 
-	private Vector2 _heading;
 	private FlockingData _flocking;
 	
 	#region Lifecycle
@@ -25,15 +24,16 @@ public partial class Enemy : CharacterBody2D
 	public override void _EnterTree()
 	{
 		var generator = new RandomNumberGenerator();
-		_heading = new Vector2(generator.RandfRange(-1f, 1f), generator.RandfRange(-1f, 1f)).Normalized();
+		var heading = new Vector2(generator.RandfRange(-1f, 1f), generator.RandfRange(-1f, 1f)).Normalized();
+		Velocity = heading * _speed;
 
 		Session.Get<EntityModel>().TryGetComponent(_entity.Id, out _flocking);
+		_flocking.Self = this;
 
 		((CircleShape2D)_flockDetectorShape.Shape).Radius = _flocking.Definition.Radius;
 
 		_flockDetector.BodyEntered += BodyEntered;
 		_flockDetector.BodyExited += BodyExited;
-		Velocity = _heading * _speed;
 	}
 
 	public override void _ExitTree()
@@ -46,7 +46,7 @@ public partial class Enemy : CharacterBody2D
 
 	private void BodyEntered(Node2D body)
 	{
-		if (body is not Enemy enemy)
+		if (body == this || body is not Enemy enemy)
 		{
 			return;
 		}
@@ -84,38 +84,36 @@ public partial class Enemy : CharacterBody2D
 
 		if (_flocking.Flock.Count > 0)
 		{
-			DrawCircle(_flocking.FlockCenter - GlobalPosition, 5f, new Color(0f, 1f, 0f, 0.7f));
+			var center = _flocking.Center - GlobalPosition;
+			DrawCircle(center, 5f, new Color(0f, 1f, 0f, 0.7f));
+			DrawLine(center, center + _flocking.Alignment, new Color(0f, 1f, 1f, 0.7f));
+			DrawLine(Vector2.Zero, _flocking.Separation, new Color(1f, 0f, 0f, 0.7f));
 		}
 	}
 
 	public override void _PhysicsProcess(double delta)
 	{
-		// if (_flocking.IsDebug)
-		// {
-			var accel = Vector2.Zero;
+		var accel = Vector2.Zero;
+		if (_flocking.Flock.Count > 0)
+		{
+			// cohesion
+			var centerDir = (_flocking.Center - GlobalPosition);
+			accel += (centerDir.Normalized() * _speed - Velocity);
+
+			// separation
+			accel += (_flocking.Separation.Normalized() * _speed - Velocity) * 1f;
+
+			// alignment
+			accel += (_flocking.Alignment.Normalized() * _speed - Velocity) * 1.5f;
+		}
+
+		if (accel == Vector2.Zero)
+		{
+			accel = Velocity;
+		}
 		
-			var center = Vector2.Zero;
-			foreach (var entry in _flocking.Flock)
-			{
-				center += entry.GlobalPosition;
-			}
-
-			if (_flocking.Flock.Count > 0)
-			{
-				center /= _flocking.Flock.Count;
-			}
-
-			_flocking.FlockCenter = center;
-			
-			var dir = (center - GlobalPosition).Normalized();
-			accel += (dir * _speed - Velocity).LimitLength(8f) * 5f;
-			
-			Velocity += accel * (float)delta;
-			float speed = Velocity.Length();
-			dir = Velocity / speed;
-			speed = Mathf.Clamp (speed, _speed / 2f, _speed);
-			Velocity = dir * speed;
-		// }
+		Velocity += accel/*.Normalized() * _speed*/ * (float)delta;
+		Velocity = Velocity.LimitLength(_speed);
 		
 		MoveAndSlide();
 
@@ -130,14 +128,6 @@ public partial class Enemy : CharacterBody2D
 		GlobalPosition = position;
 
 		QueueRedraw(); // debug purposes
-
-		// var collision = MoveAndCollide(Velocity * (float)delta);
-		// if (collision?.GetCollider() is PlayerController player)
-		// {
-		// 	Log.Debug("Dealing damage to player.");
-		// 	CallDeferred(nameof(Return));
-		// 	_isActive = false;
-		// }
 	}
 
 	#endregion Lifecycle

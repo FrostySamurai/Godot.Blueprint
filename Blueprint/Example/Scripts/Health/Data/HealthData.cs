@@ -10,6 +10,8 @@ namespace Samurai.Example.Health.Data;
 public class HealthData : IComponentData
 {
     [JsonIgnore]
+    public EntityComponentDefinition ComponentDefinition => Definition;
+    [JsonIgnore]
     public HealthComponentDefinition Definition;
     
     public string DefinitionId;
