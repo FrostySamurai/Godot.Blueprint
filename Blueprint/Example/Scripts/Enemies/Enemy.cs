@@ -8,7 +8,7 @@ using Samurai.Example.Player;
 
 namespace Samurai.Example.Enemies;
 
-public partial class Enemy : CharacterBody2D
+public partial class Enemy : CharacterBody2D, IEntityComponent
 {
 	[Export]
 	private float _minSpeed = 50f;
@@ -24,6 +24,8 @@ public partial class Enemy : CharacterBody2D
 	private FlockingData _flocking;
 	private FlockingConfig _config;
 	private Node2D _target;
+
+	public string EntityId => _entity.Id;
 	
 	#region Lifecycle
 

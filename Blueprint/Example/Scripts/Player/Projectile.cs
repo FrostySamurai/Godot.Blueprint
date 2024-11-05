@@ -1,5 +1,8 @@
 ﻿using Godot;
+using Samurai.Application;
 using Samurai.Application.Pooling;
+using Samurai.Example.Entities;
+using Samurai.Example.Health;
 using Samurai.Example.Player.Defs;
 
 namespace Samurai.Example.Player;
@@ -22,14 +25,14 @@ public partial class Projectile : Area2D
 	{
 		base._EnterTree();
 		
-		AreaEntered += OnAreaEntered;
+		BodyEntered += OnBodyEntered;
 	}
 
 	public override void _ExitTree()
 	{
 		base._ExitTree();
 
-		AreaEntered -= OnAreaEntered;
+		BodyEntered -= OnBodyEntered;
 		_definition = null;
 	}
 
@@ -42,15 +45,16 @@ public partial class Projectile : Area2D
 		Position += -Transform.Y * _speed * (float)delta;
 	}
 
-	private void OnAreaEntered(Area2D other)
+	private void OnBodyEntered(Node2D other)
 	{
-		// if (other is not HealthComponent health)
-		// {
-		// 	return;
-		// }
-		//
-		// // health.TakeDamage(_definition.Damage);
-		// CallDeferred(nameof(Return));
+		Log.Debug(other.Name);
+		if (other is not IEntityComponent entity)
+		{
+			return;
+		}
+		
+		HealthSystem.DealDamageTo(entity.EntityId, _definition.Damage);
+		CallDeferred(nameof(Return));
 	}
 
 	private void Return()

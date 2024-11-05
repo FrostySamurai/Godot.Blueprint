@@ -7,12 +7,13 @@
 
 [sub_resource type="Resource" id="Resource_yfg7t"]
 script = ExtResource("1_dtmcn")
-MaxHealth = 50
+MaxHealth = 3
+IgnoreInSave = false
 Id = "test"
 
 [sub_resource type="Resource" id="Resource_fbl01"]
 script = ExtResource("2_81bwn")
-Radius = 100.0
+IgnoreInSave = false
 Id = "swarmer"
 
 [resource]

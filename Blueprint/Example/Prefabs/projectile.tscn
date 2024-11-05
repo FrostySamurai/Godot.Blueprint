@@ -7,6 +7,8 @@
 size = Vector2(12, 12)
 
 [node name="Projectile" type="Area2D"]
+collision_layer = 8
+collision_mask = 4
 script = ExtResource("1_00lpx")
 _speed = 500.0
 
