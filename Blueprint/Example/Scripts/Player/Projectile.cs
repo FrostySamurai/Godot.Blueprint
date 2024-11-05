@@ -47,7 +47,6 @@ public partial class Projectile : Area2D
 
 	private void OnBodyEntered(Node2D other)
 	{
-		Log.Debug(other.Name);
 		if (other is not IEntityComponent entity)
 		{
 			return;

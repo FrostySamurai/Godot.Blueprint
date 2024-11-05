@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="WaveDefinition" load_steps=5 format=3 uid="uid://d35yuce2687b0"]
 
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Enemies/Defs/WaveDefinition.cs" id="1_etfqq"]
-[ext_resource type="Resource" uid="uid://b2x66qd1i35oy" path="res://Resources/Definitions/Example/Test/Swarmer.tres" id="1_x4dnu"]
+[ext_resource type="Resource" uid="uid://b2x66qd1i35oy" path="res://Resources/Definitions/Example/Enemies/Swarmer.tres" id="1_x4dnu"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Enemies/Defs/WaveEntry.cs" id="2_082nn"]
 
 [sub_resource type="Resource" id="Resource_ghsy5"]
