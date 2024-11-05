@@ -7,8 +7,7 @@ namespace Samurai.Example.Enemies.Defs;
 [GlobalClass]
 public partial class FlockingComponentDefinition : EntityComponentDefinition
 {
-    [Export]
-    public float Radius = 30f;
+    // TODO: add radius overrides or maybe into specific enemy's component? (like flock leader)
     
     public override IComponentData Create()
     {

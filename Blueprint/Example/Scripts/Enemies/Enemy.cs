@@ -34,7 +34,7 @@ public partial class Enemy : CharacterBody2D
 		Session.Get<EntityModel>().TryGetComponent(_entity.Id, out _flocking);
 		_flocking.Self = this;
 
-		((CircleShape2D)_flockDetectorShape.Shape).Radius = _flocking.Definition.Radius;
+		((CircleShape2D)_flockDetectorShape.Shape).Radius = _config.AlignmentRadius;
 
 		_flockDetector.BodyEntered += BodyEntered;
 		_flockDetector.BodyExited += BodyExited;
@@ -80,7 +80,10 @@ public partial class Enemy : CharacterBody2D
 			return;
 		}
 		
-		DrawCircle(Vector2.Zero, _flocking.Definition.Radius, new Color(0.1f, 0.1f, 0.1f, 0.3f));
+		DrawCircle(Vector2.Zero, _config.AlignmentRadius, new Color(0f, 0f, 0.5f, 0.3f));
+		DrawCircle(Vector2.Zero, _config.SeparationRadius, new Color(0.5f, 0f, 0f, 0.3f));
+		DrawCircle(Vector2.Zero, _config.CohesionRadius, new Color(0f, 0.5f, 0f, 0.3f));
+		
 		foreach (var entry in _flocking.Flock)
 		{
 			DrawLine(Vector2.Zero, entry.GlobalPosition - GlobalPosition, new Color(1f, 1f, 1f, 0.5f));
@@ -116,7 +119,8 @@ public partial class Enemy : CharacterBody2D
 			accel = Velocity;
 		}
 		
-		Velocity += accel/*.Normalized() * _speed*/ * (float)delta;
+		Velocity += accel * (float)delta;
+		// Velocity *= _speed * (float)delta; // TODO: resolve issue with them slowing down
 		Velocity = Velocity.LimitLength(_speed);
 		
 		MoveAndSlide();
