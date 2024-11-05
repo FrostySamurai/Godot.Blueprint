@@ -4,6 +4,7 @@ using Samurai.Application.Pooling;
 using Samurai.Example.Enemies.Data;
 using Samurai.Example.Enemies.Defs;
 using Samurai.Example.Entities;
+using Samurai.Example.Player;
 
 namespace Samurai.Example.Enemies;
 
@@ -20,6 +21,7 @@ public partial class Enemy : CharacterBody2D
 
 	private FlockingData _flocking;
 	private FlockingConfig _config;
+	private Node2D _target;
 	
 	#region Lifecycle
 
@@ -53,6 +55,11 @@ public partial class Enemy : CharacterBody2D
 	{
 		if (body == this || body is not Enemy enemy)
 		{
+			if (body is PlayerController)
+			{
+				_target = body;
+			}
+            
 			return;
 		}
 
@@ -63,6 +70,11 @@ public partial class Enemy : CharacterBody2D
 	{
 		if (body is not Enemy enemy)
 		{
+			if (body is PlayerController)
+			{
+				_target = null;
+			}
+			
 			return;
 		}
 
@@ -117,6 +129,12 @@ public partial class Enemy : CharacterBody2D
 
 			// alignment
 			accel += (_flocking.Alignment.Normalized() * _speed - Velocity) * _config.AlignmentMultiplier;
+		}
+
+		if (_target is not null)
+		{
+			var dir = (_target.GlobalPosition - GlobalPosition).Normalized();
+			accel += (dir * _speed - Velocity) * 1f;
 		}
 
 		if (accel == Vector2.Zero)

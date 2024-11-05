@@ -8,6 +8,8 @@ size = Vector2(24, 24)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_weaponParent")]
 position = Vector2(595, 263)
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_ad5h6")
 _weaponParent = NodePath("WeaponParent")
 
