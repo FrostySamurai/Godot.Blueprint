@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Blueprint/Scripts/StartUp.cs" id="1_t3dba"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/ExampleSessionHandler.cs" id="2_kia1m"]
-[ext_resource type="Resource" uid="uid://xura7kwcc25s" path="res://Resources/Definitions/Weapons/Test/TestWeapon.tres" id="3_joeyq"]
+[ext_resource type="Resource" uid="uid://xura7kwcc25s" path="res://Resources/Definitions/Example/Weapons/Test/TestWeapon.tres" id="3_joeyq"]
 
 [node name="StartUp" type="Node2D" node_paths=PackedStringArray("_sessionHandlers", "_sceneParent", "_poolParent2D", "_poolParent3D")]
 script = ExtResource("1_t3dba")

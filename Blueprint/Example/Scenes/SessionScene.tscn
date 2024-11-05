@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://c0f134qr8qw6a"]
+[gd_scene load_steps=9 format=3 uid="uid://c0f134qr8qw6a"]
 
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/SessionController.cs" id="1_35w0u"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/SessionReferences.cs" id="2_ymf5s"]
@@ -7,11 +7,12 @@
 [ext_resource type="PackedScene" uid="uid://54ijngjcdxui" path="res://Blueprint/Example/Prefabs/Player.tscn" id="3_ka3kg"]
 [ext_resource type="PackedScene" uid="uid://qux4pcjfy3ru" path="res://Blueprint/Example/Prefabs/UI/Button.tscn" id="3_m87r4"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/UI/SessionView.cs" id="3_tanh7"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/UI/DebugUi.cs" id="6_tq3y2"]
 
 [node name="SessionScene" type="Node2D" node_paths=PackedStringArray("_pauseView")]
 process_mode = 3
 script = ExtResource("1_35w0u")
-_pauseView = NodePath("CanvasLayer")
+_pauseView = NodePath("PauseMenu")
 
 [node name="Game" type="Node2D" parent="."]
 process_mode = 1
@@ -36,14 +37,13 @@ script = ExtResource("3_k806w")
 [node name="Player" parent="Game" instance=ExtResource("3_ka3kg")]
 position = Vector2(593, 264)
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." node_paths=PackedStringArray("_continueButton", "_mainMenuButton")]
-process_mode = 2
-visible = false
-script = ExtResource("3_tanh7")
-_continueButton = NodePath("Control/MenuPanel/ContinueButton")
-_mainMenuButton = NodePath("Control/MenuPanel/MainMenuButton")
+[node name="DebugUi" type="CanvasLayer" parent="Game" node_paths=PackedStringArray("_cohesionSlider", "_separationSlider", "_alignmentSlider")]
+script = ExtResource("6_tq3y2")
+_cohesionSlider = NodePath("Control/VBoxContainer/CohesionSlider")
+_separationSlider = NodePath("Control/VBoxContainer/SeparationSlider")
+_alignmentSlider = NodePath("Control/VBoxContainer/AlignmentSlider")
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="Control" type="Control" parent="Game/DebugUi"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -51,7 +51,65 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Background" type="ColorRect" parent="CanvasLayer/Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Game/DebugUi/Control"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -126.0
+offset_right = 250.0
+offset_bottom = -6.0
+grow_vertical = 0
+
+[node name="CohesionLabel" type="Label" parent="Game/DebugUi/Control/VBoxContainer"]
+layout_mode = 2
+text = "Cohesion"
+
+[node name="CohesionSlider" type="HSlider" parent="Game/DebugUi/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 15.0
+step = 0.1
+value = 1.0
+
+[node name="SeparationLabel" type="Label" parent="Game/DebugUi/Control/VBoxContainer"]
+layout_mode = 2
+text = "Separation"
+
+[node name="SeparationSlider" type="HSlider" parent="Game/DebugUi/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 15.0
+step = 0.1
+value = 1.0
+
+[node name="AlignmentLabel" type="Label" parent="Game/DebugUi/Control/VBoxContainer"]
+layout_mode = 2
+text = "Alignment"
+
+[node name="AlignmentSlider" type="HSlider" parent="Game/DebugUi/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+max_value = 15.0
+step = 0.1
+value = 1.0
+
+[node name="PauseMenu" type="CanvasLayer" parent="." node_paths=PackedStringArray("_continueButton", "_mainMenuButton")]
+process_mode = 2
+visible = false
+script = ExtResource("3_tanh7")
+_continueButton = NodePath("Control/MenuPanel/ContinueButton")
+_mainMenuButton = NodePath("Control/MenuPanel/MainMenuButton")
+
+[node name="Control" type="Control" parent="PauseMenu"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="PauseMenu/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -60,7 +118,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.2, 0.2, 0.2, 0.705882)
 
-[node name="MenuPanel" type="VBoxContainer" parent="CanvasLayer/Control"]
+[node name="MenuPanel" type="VBoxContainer" parent="PauseMenu/Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -77,10 +135,10 @@ pivot_offset = Vector2(150, 200)
 theme_override_constants/separation = 10
 alignment = 1
 
-[node name="ContinueButton" parent="CanvasLayer/Control/MenuPanel" instance=ExtResource("3_m87r4")]
+[node name="ContinueButton" parent="PauseMenu/Control/MenuPanel" instance=ExtResource("3_m87r4")]
 layout_mode = 2
 text = "Continue"
 
-[node name="MainMenuButton" parent="CanvasLayer/Control/MenuPanel" instance=ExtResource("3_m87r4")]
+[node name="MainMenuButton" parent="PauseMenu/Control/MenuPanel" instance=ExtResource("3_m87r4")]
 layout_mode = 2
 text = "Main Menu"

@@ -1,5 +1,4 @@
 ﻿using Godot;
-using Samurai.Application;
 using Samurai.Example.Enemies.Data;
 using Samurai.Example.Entities;
 

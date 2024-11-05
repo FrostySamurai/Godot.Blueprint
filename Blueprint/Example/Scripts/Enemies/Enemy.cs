@@ -2,6 +2,7 @@ using Godot;
 using Samurai.Application;
 using Samurai.Application.Pooling;
 using Samurai.Example.Enemies.Data;
+using Samurai.Example.Enemies.Defs;
 using Samurai.Example.Entities;
 
 namespace Samurai.Example.Enemies;
@@ -18,11 +19,14 @@ public partial class Enemy : CharacterBody2D
 	private CollisionShape2D _flockDetectorShape;
 
 	private FlockingData _flocking;
+	private FlockingConfig _config;
 	
 	#region Lifecycle
 
 	public override void _EnterTree()
 	{
+		_config = Definitions.Config<FlockingConfig>();
+		
 		var generator = new RandomNumberGenerator();
 		var heading = new Vector2(generator.RandfRange(-1f, 1f), generator.RandfRange(-1f, 1f)).Normalized();
 		Velocity = heading * _speed;
@@ -98,13 +102,13 @@ public partial class Enemy : CharacterBody2D
 		{
 			// cohesion
 			var centerDir = (_flocking.Center - GlobalPosition);
-			accel += (centerDir.Normalized() * _speed - Velocity);
+			accel += (centerDir.Normalized() * _speed - Velocity) * _config.CohesionMultiplier;
 
 			// separation
-			accel += (_flocking.Separation.Normalized() * _speed - Velocity) * 1f;
+			accel += (_flocking.Separation.Normalized() * _speed - Velocity) * _config.SeparationMultiplier;
 
 			// alignment
-			accel += (_flocking.Alignment.Normalized() * _speed - Velocity) * 1.5f;
+			accel += (_flocking.Alignment.Normalized() * _speed - Velocity) * _config.AlignmentMultiplier;
 		}
 
 		if (accel == Vector2.Zero)
