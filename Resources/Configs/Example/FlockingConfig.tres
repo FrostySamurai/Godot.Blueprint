@@ -1,12 +1,12 @@
-[gd_resource type="Resource" script_class="FlockingConfig" load_steps=2 format=3 uid="uid://daernv6s0vn6r"]
+[gd_resource type="Resource" script_class="FlockingConfig" load_steps=2 format=3]
 
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Enemies/Defs/FlockingConfig.cs" id="1_fy4yy"]
 
 [resource]
 script = ExtResource("1_fy4yy")
-CohesionRadius = 50.0
+CohesionRadius = 60.0
 SeparationRadius = 30.0
 AlignmentRadius = 100.0
-CohesionMultiplier = 1.0
-SeparationMultiplier = 1.0
-AlignmentMultiplier = 1.0
+CohesionMultiplier = 0.4
+SeparationMultiplier = 0.5
+AlignmentMultiplier = 2.5

@@ -13,6 +13,7 @@ public class FlockingData : IComponentData
     public bool IsDebug;
     public Enemy Self;
     public FlockingComponentDefinition Definition;
+    
     public HashSet<Enemy> Flock = new();
 
     public Vector2 Center;

@@ -34,7 +34,8 @@ public partial class Enemy : CharacterBody2D
 		Session.Get<EntityModel>().TryGetComponent(_entity.Id, out _flocking);
 		_flocking.Self = this;
 
-		((CircleShape2D)_flockDetectorShape.Shape).Radius = _config.AlignmentRadius;
+		float radius = Mathf.Max(_config.AlignmentRadius, Mathf.Max(_config.SeparationRadius, _config.CohesionRadius));
+		((CircleShape2D)_flockDetectorShape.Shape).Radius = radius;
 
 		_flockDetector.BodyEntered += BodyEntered;
 		_flockDetector.BodyExited += BodyExited;
@@ -100,6 +101,10 @@ public partial class Enemy : CharacterBody2D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		// TODO: debug purposes
+		float radius = Mathf.Max(_config.AlignmentRadius, Mathf.Max(_config.SeparationRadius, _config.CohesionRadius));
+		((CircleShape2D)_flockDetectorShape.Shape).Radius = radius;
+		
 		var accel = Vector2.Zero;
 		if (_flocking.Flock.Count > 0)
 		{
