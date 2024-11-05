@@ -21,4 +21,8 @@ public partial class FlockingConfig : Config
     public float SeparationMultiplier = 1f;
     [Export]
     public float AlignmentMultiplier = 1f;
+
+    [ExportCategory("Other")]
+    [Export]
+    public float MaxSteerForce = 80f;
 }

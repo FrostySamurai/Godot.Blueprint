@@ -11,6 +11,8 @@ namespace Samurai.Example.Enemies;
 public partial class Enemy : CharacterBody2D
 {
 	[Export]
+	private float _minSpeed = 50f;
+	[Export]
 	private float _speed = 50f;
 	[Export]
 	private Entity _entity;
@@ -122,19 +124,21 @@ public partial class Enemy : CharacterBody2D
 		{
 			// cohesion
 			var centerDir = (_flocking.Center - GlobalPosition);
-			accel += (centerDir.Normalized() * _speed - Velocity) * _config.CohesionMultiplier;
+			accel += (centerDir.Normalized() * _speed - Velocity).LimitLength(_config.MaxSteerForce) * _config.CohesionMultiplier;
 
 			// separation
-			accel += (_flocking.Separation.Normalized() * _speed - Velocity) * _config.SeparationMultiplier;
+			accel += (_flocking.Separation.Normalized() * _speed - Velocity).LimitLength(_config.MaxSteerForce) * _config.SeparationMultiplier;
 
 			// alignment
-			accel += (_flocking.Alignment.Normalized() * _speed - Velocity) * _config.AlignmentMultiplier;
+			accel += (_flocking.Alignment.Normalized() * _speed - Velocity).LimitLength(_config.MaxSteerForce) * _config.AlignmentMultiplier;
 		}
 
 		if (_target is not null)
 		{
-			var dir = (_target.GlobalPosition - GlobalPosition).Normalized();
-			accel += (dir * _speed - Velocity) * 1f;
+			var targetDir = (_target.GlobalPosition - GlobalPosition).Normalized();
+			float dot = targetDir.Dot(-GlobalTransform.X);
+			
+			// accel += (targetDir * _speed - Velocity).LimitLength(_config.MaxSteerForce) * 5f;
 		}
 
 		if (accel == Vector2.Zero)
@@ -143,8 +147,13 @@ public partial class Enemy : CharacterBody2D
 		}
 		
 		Velocity += accel * (float)delta;
+		float speed = Velocity.Length();
+		var dir = Velocity / speed;
+		speed = Mathf.Clamp(speed, _minSpeed, _speed);
+		Velocity = dir * speed;
+		
 		// Velocity *= _speed * (float)delta; // TODO: resolve issue with them slowing down
-		Velocity = Velocity.LimitLength(_speed);
+		// Velocity = Velocity.LimitLength(_speed);
 		
 		MoveAndSlide();
 
