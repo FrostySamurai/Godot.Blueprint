@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://dqwsw8qilieom"]
+[gd_scene load_steps=5 format=3 uid="uid://dqwsw8qilieom"]
 
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Weapons/Projectiles/Projectile.cs" id="1_00lpx"]
 [ext_resource type="Texture2D" uid="uid://btlxntokqyx2j" path="res://icon.svg" id="2_0qnmj"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Weapons/Projectiles/ForwardMover.cs" id="3_5rxo2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7lyl"]
 size = Vector2(12, 12)
@@ -18,3 +19,8 @@ shape = SubResource("RectangleShape2D_h7lyl")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("2_0qnmj")
+
+[node name="Node2D" type="Node2D" parent="." node_paths=PackedStringArray("_root")]
+script = ExtResource("3_5rxo2")
+_root = NodePath("..")
+_speed = 500.0

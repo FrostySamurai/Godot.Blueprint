@@ -8,9 +8,6 @@ namespace Samurai.Example.Weapons.Projectiles;
 
 public partial class Projectile : Area2D
 {
-	[Export]
-	private float _speed = 100f;
-
 	private ProjectileDefinition _definition;
 
 	#region Lifecycle
@@ -37,12 +34,7 @@ public partial class Projectile : Area2D
 
 	#endregion Lifecycle
 
-	public override void _Process(double delta)
-	{
-		base._PhysicsProcess(delta);
-
-		Position += -Transform.Y * _speed * (float)delta;
-	}
+	#region Events
 
 	private void OnBodyEntered(Node2D other)
 	{
@@ -57,4 +49,6 @@ public partial class Projectile : Area2D
 			NodePool.Return(this);
 		}
 	}
+
+	#endregion Events
 }
