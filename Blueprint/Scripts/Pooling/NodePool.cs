@@ -79,10 +79,7 @@ namespace Samurai.Application.Pooling
                 instance.SetName($"{prefab.Name()}_{++_instanceCounter}");
             }
             
-            
-            instance.GetParent()?.RemoveChild(instance);
-            parent?.AddChild(instance);
-
+            instance.ReparentSafe(parent);
             return instance;
         }
 
@@ -158,9 +155,8 @@ namespace Samurai.Application.Pooling
                 instance.QueueFree();
                 return;
             }
-
-            instance.GetParent().RemoveChild(instance);
-            parent.AddChild(instance);
+            
+            instance.ReparentSafe(parent);
             pool.Enqueue(instance);
         }
 

@@ -52,14 +52,9 @@ public partial class Projectile : Area2D
 		}
 		
 		HealthSystem.DealDamageTo(entity.EntityId, _definition.Damage);
-		if (_definition.RemoveOnImpact) // TODO: not doing this crashes the game?
+		if (_definition.RemoveOnImpact)
 		{
-			CallDeferred(nameof(Return));
+			NodePool.Return(this);
 		}
-	}
-
-	private void Return()
-	{
-		NodePool.Return(this);
 	}
 }

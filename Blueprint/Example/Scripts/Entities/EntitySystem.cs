@@ -33,4 +33,16 @@ public static class EntitySystem
 
         return instance;
     }
+
+    public static void Despawn(string id)
+    {
+        var model = Session.Get<EntityModel>();
+        if (!model.TryGet(id, out var entity))
+        {
+            return;
+        }
+        
+        NodePool.Return(entity.Root);
+        model.Remove(id);
+    }
 }

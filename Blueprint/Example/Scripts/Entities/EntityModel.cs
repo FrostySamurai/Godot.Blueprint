@@ -60,6 +60,11 @@ public class EntityModel : ISavable
         return _entities;
     }
 
+    public bool TryGet(string id, out EntityData entity)
+    {
+        return _entitiesById.TryGetValue(id, out entity);
+    }
+
     public IEnumerable<T> GetAllComponents<T>() where T : IComponentData
     {
         var componentType = typeof(T);

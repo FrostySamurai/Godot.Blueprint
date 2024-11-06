@@ -13,6 +13,6 @@ Id = "test"
 
 [resource]
 script = ExtResource("1_2nw0v")
-FireCooldown = 0.5
+FireCooldown = 0.2
 Projectile = SubResource("Resource_ulsgo")
 Id = ""

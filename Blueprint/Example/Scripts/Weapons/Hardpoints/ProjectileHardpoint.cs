@@ -55,9 +55,7 @@ public partial class ProjectileHardpoint : Node2D
         var parent = Session.Get<SessionReferences>().ProjectileParent;
         foreach (var entry in _spawnPoints)
         {
-            // TODO: there is a bug here somewhere because sometimes 1 or 2 projectiles fire for some reason
             var projectile = NodePool.Retrieve<Projectile>(_definition.Projectile.Prefab, parent);
-            
             projectile.Init(_definition.Projectile);
             projectile.GlobalPosition = entry.GlobalPosition;
             projectile.SetRotation(entry.GlobalRotation);

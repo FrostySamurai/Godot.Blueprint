@@ -12,7 +12,7 @@ script = ExtResource("1_ra8ii")
 script = ExtResource("2_4k5oh")
 _definition = ExtResource("3_l6y8w")
 _weapon = NodePath("..")
-_spawnPoints = [NodePath("Barrel/SpawnPoint"), NodePath("Barrel2/SpawnPoint"), NodePath("Barrel3/SpawnPoint")]
+_spawnPoints = [NodePath("Barrel/SpawnPoint")]
 
 [node name="Barrel" type="Node2D" parent="ProjectileHardpoint"]
 
@@ -22,26 +22,4 @@ scale = Vector2(0.03, 0.2)
 texture = ExtResource("2_352t3")
 
 [node name="SpawnPoint" type="Node2D" parent="ProjectileHardpoint/Barrel"]
-position = Vector2(0, -22)
-
-[node name="Barrel2" type="Node2D" parent="ProjectileHardpoint"]
-rotation = 0.214676
-
-[node name="Sprite2D" type="Sprite2D" parent="ProjectileHardpoint/Barrel2"]
-position = Vector2(0, -12)
-scale = Vector2(0.03, 0.2)
-texture = ExtResource("2_352t3")
-
-[node name="SpawnPoint" type="Node2D" parent="ProjectileHardpoint/Barrel2"]
-position = Vector2(0, -22)
-
-[node name="Barrel3" type="Node2D" parent="ProjectileHardpoint"]
-rotation = -0.214676
-
-[node name="Sprite2D" type="Sprite2D" parent="ProjectileHardpoint/Barrel3"]
-position = Vector2(0, -12)
-scale = Vector2(0.03, 0.2)
-texture = ExtResource("2_352t3")
-
-[node name="SpawnPoint" type="Node2D" parent="ProjectileHardpoint/Barrel3"]
 position = Vector2(0, -22)

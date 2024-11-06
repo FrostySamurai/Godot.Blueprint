@@ -1,6 +1,5 @@
 ﻿using Godot;
 using Samurai.Application;
-using Samurai.Application.Pooling;
 using Samurai.Example.Health;
 
 namespace Samurai.Example.Entities;
@@ -30,12 +29,7 @@ public partial class Entity : Node2D
     {
         if (evt.IsMatch(Id))
         {
-            CallDeferred(nameof(Return));
+            EntitySystem.Despawn(Id);
         }
-    }
-
-    private void Return()
-    {
-        NodePool.Return(_root);
     }
 }
