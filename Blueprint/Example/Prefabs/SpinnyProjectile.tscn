@@ -22,5 +22,4 @@ texture = ExtResource("2_yig17")
 [node name="Node2D" type="Node2D" parent="." node_paths=PackedStringArray("_root")]
 script = ExtResource("3_aytme")
 _root = NodePath("..")
-_angularSpeed = 360.0
-_distanceDelta = 10.0
+_angularSpeed = 180.0

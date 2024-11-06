@@ -38,6 +38,6 @@ public partial class SpinnyMover : Node2D
         _root.GlobalPosition = _root.Parent.GlobalPosition + dir * (_baseDistance + pulseDistance);
 
         _rotation += _angularSpeedRadians * (float)delta;
-        _pulse += _pulsationDuration * RadiansInCircle * (float)delta;
+        _pulse += (RadiansInCircle * (float)delta) / _pulsationDuration;
     }
 }

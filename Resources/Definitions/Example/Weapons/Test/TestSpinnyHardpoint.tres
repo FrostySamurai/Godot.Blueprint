@@ -8,12 +8,11 @@
 script = ExtResource("1_jdnth")
 Prefab = ExtResource("1_yhpx1")
 Damage = 1
-SpawnOnSelf = true
 RemoveOnImpact = false
 Id = "test_spinny_projectile"
 
 [resource]
 script = ExtResource("1_42ttt")
-ProjectileCount = 3
+ProjectileCount = 5
 Projectile = SubResource("Resource_42l6l")
 Id = "test_spinny_hardpoint"
