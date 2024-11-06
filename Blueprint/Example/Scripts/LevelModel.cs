@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Samurai.Application;
 using Samurai.Application.Saving;
 using Samurai.Example.Defs;
 
 namespace Samurai.Example;
 
+[Serializable]
 public class LevelModel : ISavable
 {
     public readonly string LevelId;

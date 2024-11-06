@@ -1,7 +1,8 @@
 using Godot;
 using Samurai.Application;
 using Samurai.Application.Pooling;
-using Samurai.Example.Player.Defs;
+using Samurai.Example.Weapons;
+using Samurai.Example.Weapons.Defs;
 
 namespace Samurai.Example.Player;
 
@@ -81,8 +82,7 @@ public partial class PlayerController : CharacterBody2D
 			return;
 		}
 
-		_currentWeapon = NodePool.Retrieve<Weapon>(def.Prefab, _weaponParent);
-		_currentWeapon.Init(def);
+		_currentWeapon = NodePool.Retrieve<Weapon>(def.Prefab, _weaponParent);;
 	}
 
 	#endregion Private

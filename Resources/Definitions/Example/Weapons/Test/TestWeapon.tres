@@ -1,12 +1,9 @@
-[gd_resource type="Resource" script_class="WeaponDefinition" load_steps=4 format=3 uid="uid://xura7kwcc25s"]
+[gd_resource type="Resource" script_class="WeaponDefinition" load_steps=3 format=3 uid="uid://xura7kwcc25s"]
 
 [ext_resource type="PackedScene" uid="uid://d3s1o27guq527" path="res://Blueprint/Example/Prefabs/TestWeapon.tscn" id="1_4tjjn"]
-[ext_resource type="Resource" uid="uid://b1ok0nd0f5o0d" path="res://Resources/Definitions/Example/Weapons/Test/TestProjectile.tres" id="1_gx3xa"]
-[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Player/Defs/WeaponDefinition.cs" id="3_3phm0"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Weapons/Defs/WeaponDefinition.cs" id="2_dh2s1"]
 
 [resource]
-script = ExtResource("3_3phm0")
-FireCooldown = 0.7
+script = ExtResource("2_dh2s1")
 Prefab = ExtResource("1_4tjjn")
-Projectiles = Array[Object]([ExtResource("1_gx3xa"), ExtResource("1_gx3xa"), ExtResource("1_gx3xa")])
 Id = "test"

@@ -1,11 +1,10 @@
 ﻿using Godot;
-using Samurai.Application;
 using Samurai.Application.Pooling;
 using Samurai.Example.Entities;
 using Samurai.Example.Health;
-using Samurai.Example.Player.Defs;
+using Samurai.Example.Weapons.Defs;
 
-namespace Samurai.Example.Player;
+namespace Samurai.Example.Weapons;
 
 public partial class Projectile : Area2D
 {

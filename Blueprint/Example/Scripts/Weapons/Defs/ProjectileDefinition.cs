@@ -1,7 +1,7 @@
 ﻿using Godot;
 using Samurai.Application;
 
-namespace Samurai.Example.Player.Defs;
+namespace Samurai.Example.Weapons.Defs;
 
 [GlobalClass]
 public partial class ProjectileDefinition : Definition
