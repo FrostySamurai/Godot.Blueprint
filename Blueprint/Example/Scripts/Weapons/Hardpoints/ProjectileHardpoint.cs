@@ -56,7 +56,7 @@ public partial class ProjectileHardpoint : Node2D
         foreach (var entry in _spawnPoints)
         {
             var projectile = NodePool.Retrieve<Projectile>(_definition.Projectile.Prefab, parent);
-            projectile.Init(_definition.Projectile);
+            projectile.Init(_definition.Projectile, this);
             projectile.GlobalPosition = entry.GlobalPosition;
             projectile.SetRotation(entry.GlobalRotation);
         }

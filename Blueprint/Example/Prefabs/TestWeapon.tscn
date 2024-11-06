@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://d3s1o27guq527"]
+[gd_scene load_steps=7 format=3 uid="uid://d3s1o27guq527"]
 
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Weapons/Weapon.cs" id="1_ra8ii"]
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Weapons/Hardpoints/ProjectileHardpoint.cs" id="2_4k5oh"]
 [ext_resource type="Texture2D" uid="uid://btlxntokqyx2j" path="res://icon.svg" id="2_352t3"]
 [ext_resource type="Resource" uid="uid://b5rw3c46fj7xx" path="res://Resources/Definitions/Example/Weapons/Test/TestProjectileHardpoint.tres" id="3_l6y8w"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Weapons/Hardpoints/SpinnyHardpoint.cs" id="5_s4og6"]
+[ext_resource type="Resource" uid="uid://juj1cc2e2tyl" path="res://Resources/Definitions/Example/Weapons/Test/TestSpinnyHardpoint.tres" id="6_51mwn"]
 
 [node name="TestWeapon" type="Node2D"]
 script = ExtResource("1_ra8ii")
@@ -23,3 +25,7 @@ texture = ExtResource("2_352t3")
 
 [node name="SpawnPoint" type="Node2D" parent="ProjectileHardpoint/Barrel"]
 position = Vector2(0, -22)
+
+[node name="SpinnyHardpoint" type="Node2D" parent="."]
+script = ExtResource("5_s4og6")
+_definition = ExtResource("6_51mwn")

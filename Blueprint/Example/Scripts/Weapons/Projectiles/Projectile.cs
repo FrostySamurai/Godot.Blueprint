@@ -9,12 +9,16 @@ namespace Samurai.Example.Weapons.Projectiles;
 public partial class Projectile : Area2D
 {
 	private ProjectileDefinition _definition;
+	private Node2D _parent;
+
+	public Node2D Parent => _parent;
 
 	#region Lifecycle
 
-	public void Init(ProjectileDefinition def)
+	public void Init(ProjectileDefinition def, Node2D parent)
 	{
 		_definition = def;
+		_parent = parent;
 	}
 
 	public override void _EnterTree()
@@ -30,6 +34,7 @@ public partial class Projectile : Area2D
 
 		BodyEntered -= OnBodyEntered;
 		_definition = null;
+		_parent = null;
 	}
 
 	#endregion Lifecycle

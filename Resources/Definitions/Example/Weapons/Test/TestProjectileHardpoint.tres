@@ -8,11 +8,12 @@
 script = ExtResource("2_5jxhk")
 Prefab = ExtResource("1_n65a6")
 Damage = 1
+SpawnOnSelf = false
 RemoveOnImpact = true
-Id = "test"
+Id = "test_projectile"
 
 [resource]
 script = ExtResource("1_2nw0v")
 FireCooldown = 0.2
 Projectile = SubResource("Resource_ulsgo")
-Id = ""
+Id = "test_projectile_hardpoint"

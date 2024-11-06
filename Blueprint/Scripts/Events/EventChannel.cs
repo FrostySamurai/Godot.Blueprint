@@ -16,8 +16,10 @@ namespace Samurai.Application.Events
     {
         internal override Type DataType => typeof(T);
 
-        private List<EventCallback<T>> _callbacks = new();
-        private Dictionary<object, EventCallback<T>> _callbacksBySource = new();
+        private readonly List<EventCallback<T>> _callbacks = new();
+        private readonly Dictionary<object, EventCallback<T>> _callbacksBySource = new();
+
+        private readonly List<EventCallback<T>> _raiseList = new();
 
         internal void Register(EventCallback<T> callback, object source)
         {
@@ -40,10 +42,13 @@ namespace Samurai.Application.Events
 
         internal void Raise(T @event)
         {
-            foreach (var entry in _callbacks)
+            // TODO: optimize this, this is a workaround to avoid changing the list while invoking
+            _raiseList.AddRange(_callbacks);
+            foreach (var entry in _raiseList)
             {
                 entry?.Invoke(@event);
             }
+            _raiseList.Clear();
         }
 
         private void Remove(EventCallback<T> callback, object source)
