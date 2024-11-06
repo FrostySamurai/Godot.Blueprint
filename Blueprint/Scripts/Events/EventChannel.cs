@@ -19,8 +19,6 @@ namespace Samurai.Application.Events
         private readonly List<EventCallback<T>> _callbacks = new();
         private readonly Dictionary<object, EventCallback<T>> _callbacksBySource = new();
 
-        private readonly List<EventCallback<T>> _raiseList = new();
-
         internal void Register(EventCallback<T> callback, object source)
         {
             if (_callbacksBySource.TryGetValue(source, out var existing))
@@ -43,12 +41,11 @@ namespace Samurai.Application.Events
         internal void Raise(T @event)
         {
             // TODO: optimize this, this is a workaround to avoid changing the list while invoking
-            _raiseList.AddRange(_callbacks);
-            foreach (var entry in _raiseList)
+            var callbacks = new List<EventCallback<T>>(_callbacks);
+            foreach (var entry in callbacks)
             {
                 entry?.Invoke(@event);
             }
-            _raiseList.Clear();
         }
 
         private void Remove(EventCallback<T> callback, object source)
