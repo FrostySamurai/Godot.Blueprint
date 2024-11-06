@@ -51,8 +51,15 @@ public partial class Projectile : Area2D
 		HealthSystem.DealDamageTo(entity.EntityId, _definition.Damage);
 		if (_definition.RemoveOnImpact)
 		{
-			NodePool.Return(this);
+			// TODO: this has to be deferred cuz they cant be removed during physics events
+			// NodePool.Return(this);
+			CallDeferred(nameof(Return));
 		}
+	}
+
+	private void Return()
+	{
+		NodePool.Return(this);
 	}
 
 	#endregion Events
