@@ -8,9 +8,16 @@ public partial class SpinnyMover : Node2D
     private Projectile _root;
     [Export]
     private float _angularSpeed;
+    [Export]
+    private float _baseDistance = 75f;
+    [Export]
+    private float _distanceDelta = 25f;
+    [Export]
+    private float _pulsationDuration = 1f;
 
     private float _angularSpeedRadians;
     private float _rotation;
+    private float _pulse;
     
     public override void _EnterTree()
     {
@@ -24,9 +31,13 @@ public partial class SpinnyMover : Node2D
     {
         base._PhysicsProcess(delta);
 
+        const float RadiansInCircle = 2f * Mathf.Pi;
+
         var dir = new Vector2(Mathf.Cos(_rotation), Mathf.Sin(_rotation));
-        _root.GlobalPosition = _root.Parent.GlobalPosition + dir * 100f;
+        float pulseDistance = Mathf.Sin(_pulse) * _distanceDelta;
+        _root.GlobalPosition = _root.Parent.GlobalPosition + dir * (_baseDistance + pulseDistance);
 
         _rotation += _angularSpeedRadians * (float)delta;
+        _pulse += _pulsationDuration * RadiansInCircle * (float)delta;
     }
 }
