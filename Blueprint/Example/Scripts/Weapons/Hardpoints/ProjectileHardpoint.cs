@@ -3,6 +3,7 @@ using Godot;
 using Samurai.Application;
 using Samurai.Application.Pooling;
 using Samurai.Example.Weapons.Defs;
+using Samurai.Example.Weapons.Projectiles;
 
 namespace Samurai.Example.Weapons.Hardpoints;
 

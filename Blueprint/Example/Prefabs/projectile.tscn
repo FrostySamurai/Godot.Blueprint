@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://dqwsw8qilieom"]
 
-[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Weapons/Projectile.cs" id="1_00lpx"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Weapons/Projectiles/Projectile.cs" id="1_00lpx"]
 [ext_resource type="Texture2D" uid="uid://btlxntokqyx2j" path="res://icon.svg" id="2_0qnmj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7lyl"]

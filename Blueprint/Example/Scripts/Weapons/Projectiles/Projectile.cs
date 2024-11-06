@@ -4,7 +4,7 @@ using Samurai.Example.Entities;
 using Samurai.Example.Health;
 using Samurai.Example.Weapons.Defs;
 
-namespace Samurai.Example.Weapons;
+namespace Samurai.Example.Weapons.Projectiles;
 
 public partial class Projectile : Area2D
 {
@@ -52,7 +52,10 @@ public partial class Projectile : Area2D
 		}
 		
 		HealthSystem.DealDamageTo(entity.EntityId, _definition.Damage);
-		CallDeferred(nameof(Return));
+		if (_definition.RemoveOnImpact) // TODO: not doing this crashes the game?
+		{
+			CallDeferred(nameof(Return));
+		}
 	}
 
 	private void Return()

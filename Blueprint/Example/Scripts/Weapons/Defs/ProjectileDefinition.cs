@@ -7,7 +7,9 @@ namespace Samurai.Example.Weapons.Defs;
 public partial class ProjectileDefinition : Definition
 {
     [Export]
+    public PackedScene Prefab;
+    [Export]
     public int Damage = 1;
     [Export]
-    public PackedScene Prefab;
+    public bool RemoveOnImpact = true;
 }
