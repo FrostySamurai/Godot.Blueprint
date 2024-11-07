@@ -33,8 +33,9 @@ public partial class SpinnyHardpoint : Node2D
     public override void _ExitTree()
     {
         base._ExitTree();
-        
-        NodePool.Return(_projectiles);
-        _projectiles.Clear();
+
+        // TODO: projectiles are already destroyed at this point? causes errors after restarting the game so commented out for now
+        // NodePool.Return(_projectiles);
+        // _projectiles.Clear();
     }
 }

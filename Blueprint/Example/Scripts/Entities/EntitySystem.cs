@@ -2,6 +2,7 @@
 using Godot;
 using Samurai.Application;
 using Samurai.Application.Pooling;
+using Samurai.Application.Utility;
 
 namespace Samurai.Example.Entities;
 
@@ -27,8 +28,7 @@ public static class EntitySystem
         var model = Session.Get<EntityModel>();
         model.Add(data);
         
-        parent.AddChild(instance);
-        
+        instance.ReparentSafe(parent);
         Session.Events.Raise(new EntityEvents.OnEntitySpawned(id));
 
         return instance;
