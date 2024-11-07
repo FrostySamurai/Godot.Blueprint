@@ -1,23 +1,26 @@
-[gd_scene load_steps=4 format=3 uid="uid://54ijngjcdxui"]
+[gd_scene load_steps=5 format=3 uid="uid://54ijngjcdxui"]
 
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Player/PlayerController.cs" id="1_ad5h6"]
+[ext_resource type="Script" path="res://Blueprint/Example/Scripts/Entities/Entity.cs" id="1_nvimw"]
 [ext_resource type="Texture2D" uid="uid://btlxntokqyx2j" path="res://icon.svg" id="2_poi2a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mnmuj"]
 size = Vector2(24, 24)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_weaponParent")]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("_root")]
 position = Vector2(595, 263)
-collision_layer = 2
-collision_mask = 2
+script = ExtResource("1_nvimw")
+_root = NodePath(".")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("_weaponParent")]
 script = ExtResource("1_ad5h6")
 _weaponParent = NodePath("WeaponParent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("RectangleShape2D_mnmuj")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_poi2a")
 
-[node name="WeaponParent" type="Node2D" parent="."]
+[node name="WeaponParent" type="Node2D" parent="CharacterBody2D"]
