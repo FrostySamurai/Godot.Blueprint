@@ -157,7 +157,7 @@ public partial class Enemy : CharacterBody2D, IEntityComponent
 		// Velocity *= _speed * (float)delta; // TODO: resolve issue with them slowing down
 		// Velocity = Velocity.LimitLength(_speed);
 		
-		MoveAndSlide();
+		// MoveAndSlide();
 
 		var position = GlobalPosition;
 		var viewportSize = GetViewportRect().Size;

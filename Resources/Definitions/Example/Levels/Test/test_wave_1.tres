@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="WaveDefinition" load_steps=5 format=3 uid="uid://d35yuce2687b0"]
+[gd_resource type="Resource" script_class="WaveDefinition" load_steps=8 format=3 uid="uid://d35yuce2687b0"]
 
 [ext_resource type="Script" path="res://Blueprint/Example/Scripts/Enemies/Defs/WaveDefinition.cs" id="1_etfqq"]
 [ext_resource type="Resource" uid="uid://b2x66qd1i35oy" path="res://Resources/Definitions/Example/Entities/Enemies/Swarmer.tres" id="1_x4dnu"]
@@ -7,9 +7,24 @@
 [sub_resource type="Resource" id="Resource_ghsy5"]
 script = ExtResource("2_082nn")
 EntityDefinition = ExtResource("1_x4dnu")
-Count = 50
+Count = 10
+
+[sub_resource type="Resource" id="Resource_joxb0"]
+script = ExtResource("2_082nn")
+EntityDefinition = ExtResource("1_x4dnu")
+Count = 10
+
+[sub_resource type="Resource" id="Resource_bwqsu"]
+script = ExtResource("2_082nn")
+EntityDefinition = ExtResource("1_x4dnu")
+Count = 10
+
+[sub_resource type="Resource" id="Resource_e0eu6"]
+script = ExtResource("2_082nn")
+EntityDefinition = ExtResource("1_x4dnu")
+Count = 10
 
 [resource]
 script = ExtResource("1_etfqq")
-Entries = Array[Object]([SubResource("Resource_ghsy5")])
+Entries = Array[Object]([SubResource("Resource_ghsy5"), SubResource("Resource_joxb0"), SubResource("Resource_bwqsu"), SubResource("Resource_e0eu6")])
 Id = "test_wave_1"

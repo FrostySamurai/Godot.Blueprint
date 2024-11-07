@@ -12,6 +12,8 @@ namespace Samurai.Example.Enemies;
 public partial class Spawner : Node2D
 {
     private readonly List<WaveDefinition> _waves = new();
+
+    private RandomNumberGenerator _rng = new();
     
     public override void _EnterTree()
     {
@@ -42,46 +44,56 @@ public partial class Spawner : Node2D
 
         var viewportSize = GetViewportRect().Size;
         var parent = Session.Get<SessionReferences>().EnemyParent;
-        var rng = new RandomNumberGenerator();
+
+        var screenCenter = viewportSize / 2f;
         foreach (var waveEntry in wave.Entries)
         {
             if (waveEntry.EntityDefinition is null)
             {
                 continue;
             }
+
+            float radius = Mathf.Max(viewportSize.X, viewportSize.Y);
+            float seed = _rng.RandfRange(0f, Mathf.Pi * 2f);
+            var startingPosition = screenCenter + new Vector2(Mathf.Cos(seed), Mathf.Sin(seed)) * radius;
+            startingPosition = screenCenter + new Vector2(Mathf.Cos(seed), Mathf.Sin(seed)) * 300f; // TODO: delete this row
+            var startDir = (startingPosition - screenCenter).Normalized();
+            var rowStartOffsetDir = new Vector2(startDir.Y, -startDir.X);
+
+            Enemy leader = null; // TODO: figure out how to get these, maybe something like Dictiontry<Type, object> in entities and they will register themselves there?
+            HashSet<Enemy> members = new();
+
+            int enemiesPerRow = 1;
+            int rowCount = 0;
+            var pos = startingPosition;
             
             for (int i = 0; i < waveEntry.Count; i++)
             {
-                int xSide = Mathf.Sign(rng.Randf() - 0.5f);
-                xSide = xSide == 0 ? 1 : xSide;
-                int ySide = Mathf.Sign(rng.Randf() - 0.5f);
-                ySide = ySide == 0 ? 1 : ySide;
+                var entity = EntitySystem.Spawn(waveEntry.EntityDefinition, parent, pos);
+                rowCount++;
 
-                bool longSideX = rng.Randf() >= 0.5f;
+                pos += -rowStartOffsetDir * 50f;
 
-                float xPos = Mathf.Max(0, xSide) * viewportSize.X + xSide * rng.RandfRange(0f, 100f);
-                float yPos = Mathf.Max(0, ySide) * viewportSize.Y + ySide * rng.RandfRange(0f, 100f);
-
-                if (longSideX)
+                if (rowCount % enemiesPerRow == 0)
                 {
-                    xPos = rng.RandfRange(-100f, viewportSize.X + 100f);
-                }
-                else
-                {
-                    yPos = rng.RandfRange(-100f, viewportSize.Y + 100f);
-                }
+                    rowCount = 0;
+                    enemiesPerRow++;
 
-                var entity = EntitySystem.Spawn(waveEntry.EntityDefinition, parent, new Vector2(xPos, yPos));
-                if (i == 0)
-                {
-                    if (Session.Get<EntityModel>().TryGetComponent(entity.Id, out FlockingData data))
-                    {
-                        data.IsDebug = true;
-                    }
+                    startingPosition += startDir * 50f;
+                    pos = startingPosition;
+                    pos += rowStartOffsetDir * ((enemiesPerRow - 1) * 25f);
                 }
             }
         }
         
         Session.Get<LevelModel>().SpawnedWaveIds.Add(wave.Id);
+    }
+
+    private Vector2 GetSpawnDir()
+    {
+        return new Vector2(
+            _rng.Randf() >= 0f ? 1f : -1f,
+            _rng.Randf() >= 0f ? 1f : -1f
+        );
     }
 }
