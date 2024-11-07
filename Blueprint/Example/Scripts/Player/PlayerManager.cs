@@ -6,6 +6,8 @@ namespace Samurai.Example.Player;
 
 public partial class PlayerManager : Node2D
 {
+    public const string PlayerId = "player";
+    
     [Export]
     private EntityDefinition _playerDefinition;
     
@@ -14,6 +16,6 @@ public partial class PlayerManager : Node2D
         base._EnterTree();
 
         var parent = Session.Get<SessionReferences>().PlayerParent;
-        EntitySystem.Spawn(_playerDefinition, parent, GetViewportRect().Size / 2f);
+        EntitySystem.Spawn(_playerDefinition, parent, GetViewportRect().Size / 2f, PlayerId);
     }
 }

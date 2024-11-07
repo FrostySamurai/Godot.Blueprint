@@ -10,7 +10,7 @@ public static class EntitySystem
 {
     public const string LogTag = "Entities";
 
-    public static Entity Spawn(EntityDefinition definition, Node2D parent, Vector2 position)
+    public static Entity Spawn(EntityDefinition definition, Node2D parent, Vector2 position, string overrideId = null)
     {
         var instance = NodePool.RetrieveParentless<Entity>(definition.Prefab);
         if (instance is null)
@@ -21,7 +21,7 @@ public static class EntitySystem
 
         instance.GlobalPosition = position;
 
-        string id = Guid.NewGuid().ToString();
+        string id = overrideId ?? Guid.NewGuid().ToString();
         instance.Id = id;
 
         var data = new EntityData(id, definition, instance);
